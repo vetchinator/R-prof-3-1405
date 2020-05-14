@@ -9,6 +9,5 @@ import TestComp from './components/TestComponent/index.jsx';
 let container = document.getElementById('app')
 
 ReactDom.render(
-    <TestComp />
+    <TestComp father={'Darth Vader'}/>
     , container);
-    
