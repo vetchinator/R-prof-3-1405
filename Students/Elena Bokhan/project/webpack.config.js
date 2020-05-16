@@ -33,8 +33,8 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: path.join('style', '[name].css'),
-			chunkFilename: '[id].css',
+			filename: path.join('style','[name].css'),
+			chunkFilename: '[id].css'			
 		}),
 		new HtmlWebpackPlugin({  
 			filename: 'index.html',
