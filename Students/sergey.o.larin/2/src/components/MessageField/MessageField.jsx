@@ -6,18 +6,6 @@ import {Send} from '@material-ui/icons';
 
 import Message from '../Message/Message.jsx';
 
-/*const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        margin: '10px 5px 5px 5px',
-    },
-    button: {
-        "&:hover, &.Mui-focusVisible": { backgroundColor: "yellow" }
-    }
-}));*/
 
 const useStyles = theme => ({
     root: {
