@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './layout/style/main.css';
 
@@ -11,7 +11,10 @@ let container = document.getElementById('app')
 let user = 'Loontik';
 
 ReactDom.render(
-    <MessagesField user={ user } />,
+    <div className="d-flex w-100 justify-content-center">
+        <MessagesField user={ user } />
+    </div>
+    ,
     container
 )
 
