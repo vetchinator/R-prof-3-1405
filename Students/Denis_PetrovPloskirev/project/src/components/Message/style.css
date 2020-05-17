@@ -1,0 +1,6 @@
+p.message {
+  color: darkred;
+  border: 1px dotted #ccc;
+  border-radius: 3px;
+  padding: 0 15px;
+}
