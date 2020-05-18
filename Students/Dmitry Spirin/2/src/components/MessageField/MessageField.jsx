@@ -30,11 +30,11 @@ export default class MessagesField extends Component {
         }
     }
 
-    handleSend = (evt) => {
+    handleSend = (user) => {
         this.setState({
             text: '',
             messages: [...this.state.messages, { 
-                user: this.props.user, 
+                user: user ? user : null, 
                 text: this.state.text 
             }]
         });
@@ -43,22 +43,14 @@ export default class MessagesField extends Component {
     handleChange = (evt) => {
         evt.keyCode !== 13 ? 
             this.setState({ text: evt.target.value }) :
-            this.handleSend(evt)
+            this.handleSend(this.props.user)
     }
 
     componentDidUpdate() {
         if (this.state.messages[this.state.messages.length - 1].user &&
-            this.state.messages.length % 2 == 0) {
-            this.setState({
-                            text: '',
-                            messages: [...this.state.messages, { 
-                                user: null, 
-                                text: this.state.text 
-                            }]
-                        });
+            this.state.messages.length % 2) {
+            this.handleSend()
         }
-        
-        console.log(`Bot answers`)
     }
 
     render() {
