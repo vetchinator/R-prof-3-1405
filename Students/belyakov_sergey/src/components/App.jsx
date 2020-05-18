@@ -42,7 +42,7 @@ export default class App extends Component {
     if (this.state.inputValue !== '') {
       e.preventDefault()
       this.setState((prevState) => ({
-        messages: [...this.state.messages, {
+        messages: [...prevState.messages, {
           author: 'user',
           message: this.state.inputValue
         }],
@@ -60,7 +60,7 @@ export default class App extends Component {
 
     if (botQueue) {
       if (!inProcess) {
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
           botMessageState: {
             ...prevState.botMessageState,
             botQueue: false,
@@ -68,7 +68,7 @@ export default class App extends Component {
           }
         }), () => {
           setTimeout(() => {
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
               messages: [...prevState.messages, {
                 author: 'bot',
                 message:
