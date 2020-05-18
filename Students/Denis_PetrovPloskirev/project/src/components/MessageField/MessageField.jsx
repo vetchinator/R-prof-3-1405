@@ -46,24 +46,14 @@ export default class MessagesField extends Component {
       this.handleSend(evt);
   };
 
-  componentDidMount() {
-    this.setState({
-      length: this.state.messages.length
-    });
-  }
-
-  componentDidUpdate() {
-    if (!this.state.messages[this.state.messages.length - 2].user && this.state.messages.length - this.state.length == 1) {
-      this.setState({
-        length: this.state.messages.length + 1
-      });
+  componentDidUpdate(prevProps , prevState) {
+    if (!this.state.messages[this.state.messages.length - 2].user && this.state.messages.length - prevState.messages.length == 1) {
       setTimeout(() => {
         this.setState({
           messages: [...this.state.messages, {
             user: null,
             text: 'Hello! I am Bot! And I can do this only'
-          }],
-          length: this.state.messages.length + 1
+          }]
         });
       }, 1000);
     }
