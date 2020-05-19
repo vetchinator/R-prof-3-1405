@@ -8,7 +8,7 @@ export default class MessagesField extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            lastSender: null,
+            lastSender: null, // Отслеживание последнего отправителя
             text: '',
             messages: [
                 {
@@ -51,7 +51,7 @@ export default class MessagesField extends Component {
         : this.handleSend(evt)
     }
 
-    componentDidUpdate(evt) { // Ответ бота на пользовательское сообщение
+    componentDidUpdate(evt) { // Апдейт компонента по условиям тернарника
          setTimeout(() => {
             this.state.lastSender == this.props.user ? 
             this.setState({
@@ -67,14 +67,14 @@ export default class MessagesField extends Component {
          console.log(this.state.lastSender)
     }
     
-    shouldComponentUpdate(evt) {
+    shouldComponentUpdate(evt) { // Если я - последний сендер, то меняем на бота
         if(this.state.lastSender == 'Me') {
             this.setState({
                 lastSender: 'Bot',
                 user: 'Bot'
             }) 
         } else {
-            return true
+            return true // Если бот последний - тру 
         }
     }
 
