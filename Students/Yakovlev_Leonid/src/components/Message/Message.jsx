@@ -2,24 +2,18 @@ import React from 'react';
 // import ReactDom from 'react-dom';
 import './style.css';
 
-// export default (props) => {
-//     //props: sender, text
-//     let { sender, text } = props;
-//     //dopil
-//     return (
-//         <div>
-//             <strong>{ sender }</strong>
-//             <p>{ text }</p>
-//         </div>
-//     )
-// }
+export default (props) => {
+    //props: sender, text
+    let { sender, text } = props;
 
-let message = props => {
-    let massagesArr = props.massages.map(massage => {
-    return (<><p>{ massage }</p></>)
-    });
-return (<div>{ massagesArr }</div>)
+    // sender = sender ? sender : 'Bot';
+    //dopil
+    return (
+        <div className="d-flex flex-column msg">
+            {/* <strong>{ sender }</strong> */}
+            { sender && <strong>{ sender }</strong> }
+            { !sender && <strong>Bot</strong> }
+            <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer...' }</p>
+        </div>
+    )
 }
-
-
-export default message;

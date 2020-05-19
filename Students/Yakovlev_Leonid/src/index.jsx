@@ -1,23 +1,48 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './layout/style/main.css'
-import Message from './components/Message/Message.jsx';
+import './layout/style/main.css';
 
+import MessagesField from './components/MessageField/MessageField.jsx';
 
-let container = document.getElementById('app');
+let container = document.getElementById('app')
 
-let massages = ['Я не знаю, кто вы и откуда вы, но с этого момента вы делаете так, как скажу я.', 'Разрешите мне кое-что прояснить, ваша милость. Я подчиняюсь приказаниям только одного человека: себя.'];
-
-let button = document.getElementById('button');
-button.addEventListener('click', () => {
-    massages.push('Удивительно, что вы еще живы.');
-    ReactDom.render(
-        <Message massages = { massages } />
-    , container)
-})
+let user = 'Loontik';
 
 ReactDom.render(
-        <Message massages = { massages } />
-    , container);
+    <div className="d-flex w-100 justify-content-center">
+        <MessagesField user={ user } />
+    </div>
+    ,
+    container
+)
+
+// let messages = ['Hello', 'How are you?', 'I am fine'];
+
+// const handleClick = () => {
+//     messages.push('Ok');
+
+//     ReactDom.render(
+//         <div><MessageField messages={ messages }/></div>, 
+//         container
+//     )
+// }
+
+// const Message = props => <div>{ props.text }</div>
+
+// const MessageField = props => {
+//     let msgArr = props.messages.map(text => {
+//         return (<Message text={ text } />);
+//     });
+//     return (
+//         <div>
+//             <div>{ msgArr }</div>
+//             <button onClick={ handleClick }>Send</button>
+//         </div>
+//     )
+// }
+
+// ReactDom.render(
+//     <MessageField messages={ messages }/>
+//     , container);
