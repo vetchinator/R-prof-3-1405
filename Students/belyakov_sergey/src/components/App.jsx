@@ -30,9 +30,11 @@ export default class App extends Component {
 
   onChange(e) {
     if (e.keyCode !== 13) {
-      this.setState({
-        inputValue: e.target.value
-      })
+      const inputValue = e.target.value
+      this.setState((prevState) => ({
+        ...prevState,
+        inputValue: inputValue
+      }))
     } else {
       this.onSend(e)
     }
@@ -44,7 +46,7 @@ export default class App extends Component {
       this.setState((prevState) => ({
         messages: [...prevState.messages, {
           author: 'user',
-          message: this.state.inputValue
+          message: prevState.inputValue
         }],
         inputValue: '',
         botMessageState: {
@@ -57,40 +59,46 @@ export default class App extends Component {
 
   componentDidUpdate() {
     const {botQueue, inProcess, messages} = this.state.botMessageState
-
     if (botQueue) {
       if (!inProcess) {
+        console.log(this.state)
         this.setState((prevState) => ({
           botMessageState: {
             ...prevState.botMessageState,
             botQueue: false,
             inProcess: true
           }
-        }), () => {
-          setTimeout(() => {
-            this.setState((prevState) => ({
-              messages: [...prevState.messages, {
-                author: 'bot',
-                message:
-                  messages[Math.floor(Math.random() * messages.length)]
-              }],
-              botMessageState: {
-                ...prevState.botMessageState,
-                inProcess: false
-              }
-            }))
-          }, 1000)
-        })
+        }))
+
+        setTimeout(() => {
+          this.setState((prevState) => ({
+            messages: [...prevState.messages, {
+              author: 'bot',
+              message:
+                messages[Math.floor(Math.random() * messages.length)]
+            }],
+            botMessageState: {
+              ...prevState.botMessageState,
+              inProcess: false
+            }
+          }))
+          console.log(this.state)
+        }, 2000)
+
       }
     }
+
   }
 
   render() {
     return (
       <div>
         <MessageField messages={this.state.messages}/>
-        <SendMessage onChange={this.onChange.bind(this)} onSend={this.onSend.bind(this)}
-                     inputValue={this.state.inputValue}/>
+        <SendMessage
+          onChange={this.onChange.bind(this)}
+          onSend={this.onSend.bind(this)}
+          inputValue={this.state.inputValue}
+        />
       </div>
     )
   }
