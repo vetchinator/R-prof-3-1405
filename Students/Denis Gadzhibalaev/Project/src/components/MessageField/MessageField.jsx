@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import shortid from 'shortid';
 
-import Message from '../Message/Message.jsx'
+import Message from '../Message/Message.jsx';
 import Button from '../Button/index.jsx';
 
-import './style.sass'
+import './style.sass';
 
 class App extends React.Component {
     constructor(props) {
