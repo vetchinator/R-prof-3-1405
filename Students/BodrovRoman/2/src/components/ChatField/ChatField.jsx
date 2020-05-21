@@ -51,22 +51,6 @@ export default class ChatField extends React.Component {
         )
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log(this.state.chats)
-        if (prevState.chats[prevState.chats.length-1].user !== 'Bot') {
-            setTimeout(() => {
-                console.log(`Bot answers`)
-                this.setState({
-                    chats: [...this.state.chats,
-                    {
-                        user: `Bot`,
-                        text: `I am bot`
-                    }]
-                })
-            }, 3000);
-        }
-    }
-
     handleChange = (e) => {
         e.keyCode !== 13 ?
         this.setState({ text: e.target.value }) : 
@@ -88,12 +72,28 @@ export default class ChatField extends React.Component {
         }));
     }
 
-    /*componentDidUpdate() {
-        setTimeout(() => {
-            console.log(`Bot answers`)
-            this.setState(state => ({
-                chats: state.chats.concat(['Не приставай ко мне, я робот!'])
-            }))
-        }, 1000);
-    }*/
+    componentDidUpdate(prevProps, prevState) {
+        // console.log(this.state.chats)
+        // console.log (
+        //     prevState.chats[prevState.chats.length-1].user,// !== 'Bot' 
+        //     this.state.chats.length , prevState.chats.length,
+        //     this.state.chats[this.state.chats.length-1]// !== 'Bot'
+        // )        
+        if (
+            this.state.chats[this.state.chats.length-1].user !== 'Bot'
+            && prevState.chats.length !== this.state.chats.length
+        ) {
+            setTimeout(() => {
+                console.log(`Bot answers`)
+                this.setState({
+                    chats: [...this.state.chats,
+                    {
+                        user: `Bot`,
+                        text: `I am bot`
+                    }]
+                })
+            }, 3000);
+        }
+    }
+
 }
