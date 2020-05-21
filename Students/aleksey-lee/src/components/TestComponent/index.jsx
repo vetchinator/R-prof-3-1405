@@ -1,36 +1,30 @@
-import {React, Component} from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 
 import './style.css';
 
-import Message from '../Message.jsx'
-import { render } from 'pug';
+import Message from '../Message/Message.jsx'
 
-class Father extends Component {
+let messages = ['Hello', 'How are you?', 'I am fine'];
 
-    constructor(props) {
-        super(props)
-        this.heroes = props.heroes;
-    }
+const handleClick = () => {
+    messages.push('Ok');
 
-    addFather() {
-        heroes.push('Soldier of coalition')
-        console.log(heroes)
-    }
-
-
-    render() {
-        return (<div>
-            {heroes.map((name, i) => {
-                return (
-                    <Message name={ name } key={i} />
-                );
-            })}
-            <button className="btn btn-warning" onClick={addFather}>Send</button>
-        </div>)
-    }
-
-    
+    ReactDom.render(
+        <div><MessageField messages={ messages }/></div>
+    )
 }
 
-export default test
+let MessageField = props => {
+    let msgArr = props.messages.map(text => {
+        return (<Message text={ text } />);
+    });
+    return (
+        <div>
+            <div>{ msgArr }</div>
+            <button onClick={ handleClick }>Send</button>
+        </div>
+    )
+}
+
+export default MessageField;
