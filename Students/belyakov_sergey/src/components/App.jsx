@@ -18,9 +18,13 @@ export default class App extends Component {
         }
       ],
       inputValue: '',
+      // state бота
       botMessageState: {
+        // очередь бота
         botQueue: false,
+        // сообщение в доставке
         inProcess: false,
+        // вариативность ответа
         messages: [
           'Hello', 'Im fine, thanks)', 'How do you do?', 'By'
         ]
@@ -29,7 +33,7 @@ export default class App extends Component {
   }
 
   onChange(e) {
-    if (e.keyCode !== 13) {
+    if (e.key !== "Enter") {
       const inputValue = e.target.value
       this.setState((prevState) => ({
         ...prevState,
