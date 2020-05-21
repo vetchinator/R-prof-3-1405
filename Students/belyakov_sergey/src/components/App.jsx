@@ -57,11 +57,28 @@ export default class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const {botQueue, inProcess, messages} = this.state.botMessageState
+  botSendMessage() {
+    const {messages} = this.state.botMessageState
+
+    this.setState((prevState) => ({
+      messages: [...prevState.messages, {
+        author: 'bot',
+        message:
+          messages[Math.floor(Math.random() * messages.length)]
+      }],
+      botMessageState: {
+        ...prevState.botMessageState,
+        inProcess: false
+      }
+    }))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {botQueue} = this.state.botMessageState
+    const {inProcess} = prevState.botMessageState
+
     if (botQueue) {
       if (!inProcess) {
-        console.log(this.state)
         this.setState((prevState) => ({
           botMessageState: {
             ...prevState.botMessageState,
@@ -69,25 +86,9 @@ export default class App extends Component {
             inProcess: true
           }
         }))
-
-        setTimeout(() => {
-          this.setState((prevState) => ({
-            messages: [...prevState.messages, {
-              author: 'bot',
-              message:
-                messages[Math.floor(Math.random() * messages.length)]
-            }],
-            botMessageState: {
-              ...prevState.botMessageState,
-              inProcess: false
-            }
-          }))
-          console.log(this.state)
-        }, 2000)
-
+        setTimeout(() => this.botSendMessage(), 1000)
       }
     }
-
   }
 
   render() {
