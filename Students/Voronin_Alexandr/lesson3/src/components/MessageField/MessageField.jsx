@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-
-import Message from '../Message/Message.jsx'
+import { TextField, Fab } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import './style.css';
+import Message from '../Message/Message.jsx';
 
 import { sendMessage } from '../../store/actions/messages_actions.js';
 import { bindActionCreators } from 'redux';
@@ -72,21 +74,24 @@ class MessageField extends Component {
                 key={ key }/>);
         });
 
+//layout - "d-flex flex-column w-50">
+//before input - controls d-flex w-100
         return (
-            <div className="d-flex flex-column w-50">
-                <div>
+            <div className="layout"> 
+                <div className="message-field">
                     { msgArr }
                 </div>
-                <hr/>
-                <div className="controls d-flex w-100">
-                    <input
-                        type="text" 
-                        className="w-75"
+                <div className="inputMsg">
+                    <TextField id="standart-basic"
+                        fullWidth={ true }
                         onChange={ this.handleChange }
                         onKeyUp={ this.handleChange }
                         value={ this.state.text }
                     />
-                    <button className="ml-3" onClick={ () => this.handleSend(this.state.text, 'Me') }>Send</button>
+                    <Fab size="small" color="primary"
+                    onClick={ () => this.handleSend(this.state.text, 'Me') }>
+                        <SendIcon/>
+                    </Fab>
                 </div>
             </div>
             

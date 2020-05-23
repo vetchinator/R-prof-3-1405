@@ -7,8 +7,11 @@ export default (props) => {
     let { sender, text } = props;
     //sender = sender ? sender: 'Bot';
 
+//msg - d-flex flex-column 
     return (
-        <div className="d-flex flex-column msg">
+        <div className="msg"
+        style = {{alignSelf: sender ?
+            'flex-end': 'flex-start'}}>
             { sender && <strong>{ sender }</strong>}
             { !sender && <strong>Bot</strong>}
             <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer' }</p>
