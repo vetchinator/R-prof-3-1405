@@ -5,7 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "build": "webpack --mode development",
-    "dev":"webpack-dev-server --open"
+    "dev": "webpack-dev-server --open"
   },
   "keywords": [],
   "author": "",
