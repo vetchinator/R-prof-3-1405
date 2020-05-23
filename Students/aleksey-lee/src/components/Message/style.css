@@ -1,7 +1,15 @@
 .msg {
-    background-color: lightblue;
-    padding: 5px 15px;
-    border-radius: 20px;
+    background-color: #fff;
+    padding: 20px 40px;
     font-size: 18px;
-    margin: 5px;
+    margin: 0 0 10px;
+    border-radius: 4px;
+    color: #333;
+}
+.msg strong{
+    display: block;
+    line-height: 1.4;
+}
+.msg p{
+    margin-bottom: 0;
 }

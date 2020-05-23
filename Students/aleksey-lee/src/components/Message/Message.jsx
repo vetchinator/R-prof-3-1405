@@ -6,13 +6,11 @@ export default (props) => {
     //props: sender, text
     let { sender, text } = props;
 
-    // sender = sender ? sender : 'Bot';
+    sender = sender ? sender : 'Bot';
     //dopil
     return (
-        <div className="d-flex flex-column msg">
-            {/* <strong>{ sender }</strong> */}
-            { sender && <strong>{ sender }</strong> }
-            { !sender && <strong>Bot</strong> }
+        <div className={(sender=='Bot') ? 'd-flex flex-column msg' : 'd-flex flex-column msg text-right'}>
+            { <strong>{ sender }</strong> }
             <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer...' }</p>
         </div>
     )
