@@ -18,9 +18,13 @@ export default class App extends Component {
         }
       ],
       inputValue: '',
+      // state бота
       botMessageState: {
+        // очередь бота
         botQueue: false,
+        // сообщение в доставке
         inProcess: false,
+        // вариативность ответа
         messages: [
           'Hello', 'Im fine, thanks)', 'How do you do?', 'By'
         ]
@@ -29,10 +33,12 @@ export default class App extends Component {
   }
 
   onChange(e) {
-    if (e.keyCode !== 13) {
-      this.setState({
-        inputValue: e.target.value
-      })
+    if (e.key !== "Enter") {
+      const inputValue = e.target.value
+      this.setState((prevState) => ({
+        ...prevState,
+        inputValue: inputValue
+      }))
     } else {
       this.onSend(e)
     }
@@ -44,7 +50,7 @@ export default class App extends Component {
       this.setState((prevState) => ({
         messages: [...prevState.messages, {
           author: 'user',
-          message: this.state.inputValue
+          message: prevState.inputValue
         }],
         inputValue: '',
         botMessageState: {
@@ -55,8 +61,25 @@ export default class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const {botQueue, inProcess, messages} = this.state.botMessageState
+  botSendMessage() {
+    const {messages} = this.state.botMessageState
+
+    this.setState((prevState) => ({
+      messages: [...prevState.messages, {
+        author: 'bot',
+        message:
+          messages[Math.floor(Math.random() * messages.length)]
+      }],
+      botMessageState: {
+        ...prevState.botMessageState,
+        inProcess: false
+      }
+    }))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {botQueue} = this.state.botMessageState
+    const {inProcess} = prevState.botMessageState
 
     if (botQueue) {
       if (!inProcess) {
@@ -66,21 +89,8 @@ export default class App extends Component {
             botQueue: false,
             inProcess: true
           }
-        }), () => {
-          setTimeout(() => {
-            this.setState((prevState) => ({
-              messages: [...prevState.messages, {
-                author: 'bot',
-                message:
-                  messages[Math.floor(Math.random() * messages.length)]
-              }],
-              botMessageState: {
-                ...prevState.botMessageState,
-                inProcess: false
-              }
-            }))
-          }, 1000)
-        })
+        }))
+        setTimeout(() => this.botSendMessage(), 1000)
       }
     }
   }
@@ -89,8 +99,11 @@ export default class App extends Component {
     return (
       <div>
         <MessageField messages={this.state.messages}/>
-        <SendMessage onChange={this.onChange.bind(this)} onSend={this.onSend.bind(this)}
-                     inputValue={this.state.inputValue}/>
+        <SendMessage
+          onChange={this.onChange.bind(this)}
+          onSend={this.onSend.bind(this)}
+          inputValue={this.state.inputValue}
+        />
       </div>
     )
   }
