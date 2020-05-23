@@ -43,17 +43,22 @@ export default class MessagesField extends Component {
 
   handleChange = (evt) => {
     evt.keyCode !== 13 ? 
-      this.setState({ text: evt.target.value }) :
+      this.setState({
+        text: evt.target.value,
+        isUserAnswer: false
+      }) :
       this.handleSend(evt)
   }
 
   componentDidUpdate() {
-    if (this.state.isUserAnswer) {
+    let indexUserMsg = this.state.messages.length - 2;
+    if (!this.state.messages[indexUserMsg].user && this.state.isUserAnswer) {
       setTimeout(() => {
         this.setState({ 
           text: '',
           isUserAnswer: false,
           messages: [...this.state.messages, {
+            user: null,
             text: 'cyber answer...'
           }]
         })
