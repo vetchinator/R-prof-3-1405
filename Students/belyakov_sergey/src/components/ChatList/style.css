@@ -1,0 +1,54 @@
+.chat-list {
+  width: 30%;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  border-right: #cccccc 1px solid;
+}
+
+.hidden {
+  display: none;
+}
+
+.chat-list h2 {
+  padding-left: 10px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  display: block;
+  width: 100%;
+  line-height: 35px;
+  padding: 10px;
+  height: 50px;
+  cursor: pointer;
+  border-bottom: #cccccc 1px solid;
+}
+
+ul li:hover {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.active:hover {
+  background-color: rgba(95, 119, 184, .9)
+}
+
+.active {
+  color: #ffffff;
+  background-color: rgb(95, 118, 183)
+}
+
+@media screen and (max-width: 768px) {
+  .chat-list {
+    width: 100%;
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+}

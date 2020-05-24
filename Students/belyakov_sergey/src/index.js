@@ -8,7 +8,7 @@ import './layout/style/main.css'
 import App from './components/App.jsx'
 
 ReactDom.render(
-  <CssBaseline >
+  <CssBaseline>
     <App/>
   </CssBaseline>,
   document.querySelector('#app')

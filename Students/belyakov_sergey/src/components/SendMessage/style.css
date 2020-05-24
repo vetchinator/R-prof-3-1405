@@ -1,5 +1,4 @@
 .send-message-form {
-  margin-bottom: 10px;
   display: flex;
   align-items: flex-end;
 }
@@ -10,10 +9,22 @@
   margin: 0 0 0 10px;
   background-color: inherit;
   cursor: pointer;
-  fill-opacity: .5;
   outline: none;
 }
 
+.send-message-btn svg {
+  fill: #cccccc;
+}
+
 .send-message-btn:hover {
-  fill-opacity: .7;
+  fill-opacity: 1;
+  fill: #5f75b6;
+}
+
+.send-message-btn.action svg {
+  fill: #5f75b6;
+}
+
+.send-message-btn.action svg:hover {
+  fill: #7283b0;
 }

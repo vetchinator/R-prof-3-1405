@@ -5,10 +5,27 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 40px;
+}
+
+.menu-icon {
+  display: none;
+  position: absolute;
+  top: 13px;
+  left: 10px;
+}
+
+.menu-icon svg {
+  cursor: pointer;
+  fill: #ffffff;
+}
+
+.menu-icon svg:hover {
+  fill-opacity: .7;
 }
 
 .header-bg h1 {
+  line-height: 50px;
+  height: 50px;
   color: #ffffff;
   margin: 0;
   padding: 0;
@@ -19,4 +36,14 @@
   margin: 0 auto;
   padding: 0;
   background-color: #5f77b8;
+}
+
+.hidden {
+  display: none
+}
+
+@media screen and (max-width: 768px) {
+  .menu-icon {
+    display: inherit;
+  }
 }

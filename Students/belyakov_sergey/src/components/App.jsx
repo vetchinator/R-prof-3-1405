@@ -4,6 +4,7 @@ import {Container} from "@material-ui/core"
 
 import MessageField from './MessageField/index.jsx'
 import Header from './Header/index.jsx'
+import ChatList from './ChatList/index.jsx'
 
 export default class App extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ export default class App extends Component {
         }
       }))
     }
-    setTimeout(()=>this.onScroll())
+    setTimeout(() => this.onScroll())
 
   }
 
@@ -101,16 +102,36 @@ export default class App extends Component {
     }
   }
 
+  showChatList() {
+    const chatList = document.querySelector('.chat-list');
+    const messageField = document.querySelector('.messages-field')
+    const menuIconOpen = document.querySelector('.menu-icon__open')
+    const menuIconClose = document.querySelector('.menu-icon__close')
+
+    chatList.classList.toggle('show')
+    messageField.classList.toggle('hidden')
+    menuIconOpen.classList.toggle('hidden')
+    menuIconClose.classList.toggle('hidden')
+  }
+
   render() {
     return (
-      <Container maxWidth="sm">
-        <Header />
-        <MessageField
-          messages={this.state.messages}
-          onChange={this.onChange.bind(this)}
-          onSend={this.onSend.bind(this)}
-          inputValue={this.state.inputValue}
+      <Container
+        maxWidth="lg"
+        disableGutters={true}
+      >
+        <Header
+          showChatList={this.showChatList}
         />
+        <div className="wrapper">
+          <ChatList/>
+          <MessageField
+            messages={this.state.messages}
+            onChange={this.onChange.bind(this)}
+            onSend={this.onSend.bind(this)}
+            inputValue={this.state.inputValue}
+          />
+        </div>
       </Container>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.css'
 
-import { TextField } from '@material-ui/core'
+import {TextField} from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send'
 
 export default (props) => {
@@ -17,7 +17,12 @@ export default (props) => {
         onChange={onChange}
         onKeyUp={onChange}
         value={inputValue}/>
-      <button className="send-message-btn" onClick={onSend}><SendIcon /></button>
+      <button
+        className={`send-message-btn ${inputValue !== '' ? 'action' : ''}`}
+        onClick={onSend}
+      >
+        <SendIcon/>
+      </button>
     </div>
   )
 }
