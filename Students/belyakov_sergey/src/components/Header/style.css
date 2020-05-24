@@ -1,0 +1,22 @@
+.header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40px;
+}
+
+.header-bg h1 {
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.header-bg {
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #5f77b8;
+}

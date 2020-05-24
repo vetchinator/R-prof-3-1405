@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {Container} from "@material-ui/core"
 
 import MessageField from './MessageField/index.jsx'
-import SendMessage from './SendMessage/index.jsx'
+import Header from './Header/index.jsx'
 
 export default class App extends Component {
   constructor(props) {
@@ -20,13 +20,9 @@ export default class App extends Component {
         }
       ],
       inputValue: '',
-      // state бота
       botMessageState: {
-        // очередь бота
         botQueue: false,
-        // сообщение в доставке
         inProcess: false,
-        // вариативность ответа
         messages: [
           'Hello', 'Im fine, thanks)', 'How do you do?', 'By'
         ]
@@ -108,6 +104,7 @@ export default class App extends Component {
   render() {
     return (
       <Container maxWidth="sm">
+        <Header />
         <MessageField
           messages={this.state.messages}
           onChange={this.onChange.bind(this)}
