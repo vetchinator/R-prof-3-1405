@@ -1,0 +1,15 @@
+.messages__layout {
+    width: 70%;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    background-color: #f0f5f9;
+}
+
+.messages__wrapper {
+    min-height: 0;
+    margin-bottom: 40px;
+    overflow-y: auto;
+}
