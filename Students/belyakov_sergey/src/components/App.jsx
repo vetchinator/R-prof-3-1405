@@ -34,6 +34,11 @@ export default class App extends Component {
     }
   }
 
+  onScroll() {
+    const mess = document.querySelector('.messages');
+    mess.scrollTop = mess.scrollHeight;
+  }
+
   onChange(e) {
     if (e.key !== "Enter") {
       const inputValue = e.target.value
@@ -61,6 +66,8 @@ export default class App extends Component {
         }
       }))
     }
+    setTimeout(()=>this.onScroll())
+
   }
 
   botSendMessage() {
@@ -77,6 +84,7 @@ export default class App extends Component {
         inProcess: false
       }
     }))
+    this.onScroll();
   }
 
   componentDidUpdate(prevProps, prevState) {
