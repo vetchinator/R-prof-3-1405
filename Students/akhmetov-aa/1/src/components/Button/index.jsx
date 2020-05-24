@@ -7,20 +7,22 @@ import './style.css';
 
 let button = () => {
 
-    let msgArr = [];
+    let msgArr = ['Привет!', 'Как дела?'];
     let app = document.getElementById('app');
+
+    const messages = () => {
+        return msgArr.map(name => {
+            return (<Message name={ name } />);
+        });
+    }
 
     const msgPush = () => {
         msgArr.push('Нормально');
 
-        let message = msgArr.map(name => {
-            return (<Message name={ name } />);
-        });
-
         ReactDom.render(
             <div className="wrapper">
                 <div className="messages">
-                    { message }
+                    { messages() }
                 </div>
                 <button onClick={ msgPush } className="my-btn">Нажми</button>
             </div>
@@ -30,6 +32,7 @@ let button = () => {
     return(
         <div className="wrapper">
             <div className="messages">
+                { messages() }
             </div>
             <button onClick={ msgPush } className="my-btn">Нажми</button>
         </div>
