@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import {Container} from "@material-ui/core"
+
 import MessageField from './MessageField/index.jsx'
 import SendMessage from './SendMessage/index.jsx'
 
@@ -97,14 +99,14 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <MessageField messages={this.state.messages}/>
-        <SendMessage
+      <Container maxWidth="sm">
+        <MessageField
+          messages={this.state.messages}
           onChange={this.onChange.bind(this)}
           onSend={this.onSend.bind(this)}
           inputValue={this.state.inputValue}
         />
-      </div>
+      </Container>
     )
   }
 }

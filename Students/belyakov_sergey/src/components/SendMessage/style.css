@@ -1,1 +1,19 @@
-i
+.send-message-form {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.send-message-btn {
+  border: 0;
+  padding: 0;
+  margin: 0 0 0 10px;
+  background-color: inherit;
+  cursor: pointer;
+  fill-opacity: .5;
+  outline: none;
+}
+
+.send-message-btn:hover {
+  fill-opacity: .7;
+}
