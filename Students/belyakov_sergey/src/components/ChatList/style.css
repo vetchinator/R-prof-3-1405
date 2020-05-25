@@ -21,7 +21,8 @@
 }
 
 .chat-list h2 {
-  padding-left: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
 ul {
@@ -32,6 +33,9 @@ ul {
 }
 
 ul li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: block;
   width: 100%;
   line-height: 35px;
@@ -46,12 +50,13 @@ ul li:hover {
 }
 
 .active:hover {
-  background-color: rgba(95, 119, 184, .9)
+  background-color: rgb(95, 119, 184);
 }
 
 .active {
   color: #ffffff;
-  background-color: rgb(95, 118, 183)
+
+  background-color: rgba(95, 119, 184, .9);
 }
 
 @media screen and (max-width: 768px) {
