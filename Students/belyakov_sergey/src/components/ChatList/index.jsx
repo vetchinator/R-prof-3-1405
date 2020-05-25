@@ -22,9 +22,9 @@ class ChatList extends Component {
         <div className="chat-list-rooms">
           <h2>Комнаты:</h2>
           <ul>
-            <li>Чат 1 </li>
+            <li className="active">Чат 1</li>
             <li>Чат 2</li>
-            <li className="active">Чат 3</li>
+            <li>Чат 3</li>
             <li>Чат 4</li>
           </ul>
         </div>

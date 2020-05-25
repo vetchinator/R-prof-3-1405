@@ -2,7 +2,7 @@ import {createStore} from 'redux'
 
 import initReducers from './reducers'
 
-function initStore() {
+export default function initStore() {
   const initialStore = {};
 
   return createStore(
@@ -10,5 +10,3 @@ function initStore() {
     initialStore
   )
 }
-
-export default initStore

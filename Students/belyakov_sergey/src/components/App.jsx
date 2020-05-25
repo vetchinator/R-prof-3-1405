@@ -1,25 +1,19 @@
 import React, {Component} from 'react'
 
+import {sendMessage} from '../store/actions/message-actions'
+import {bindActionCreators} from 'redux'
+import connect from 'react-redux/es/connect/connect'
+
 import {Container} from "@material-ui/core"
 
 import MessageField from './MessageField/index.jsx'
 import Header from './Header/index.jsx'
 import ChatList from './ChatList/index.jsx'
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: [
-        {
-          author: 'bot',
-          message: 'Hello!'
-        },
-        {
-          author: 'bot',
-          message: 'Send me message)'
-        }
-      ],
       inputValue: '',
       botMessageState: {
         botQueue: false,
@@ -44,18 +38,16 @@ export default class App extends Component {
         inputValue: inputValue
       }))
     } else {
-      this.onSend(e)
+      this.onSend(this.state.inputValue, 'user')
     }
   }
 
-  onSend(e) {
+  onSend(message, author) {
     if (this.state.inputValue !== '') {
-      e.preventDefault()
+      this.sendMessage(message, author)
+
       this.setState((prevState) => ({
-        messages: [...prevState.messages, {
-          author: 'user',
-          message: prevState.inputValue
-        }],
+        ...prevState,
         inputValue: '',
         botMessageState: {
           ...prevState.botMessageState,
@@ -67,15 +59,25 @@ export default class App extends Component {
 
   }
 
+  sendMessage(message, author) {
+    const {messages} = this.props
+    const messageId = Object.keys(messages).length + 1
+
+    const roomID = 1
+
+    this.props.sendMessage(messageId, message, author, roomID)
+  }
+
   botSendMessage() {
     const {messages} = this.state.botMessageState
 
+    this.sendMessage(
+      messages[Math.floor(Math.random() * messages.length)],
+      'bot'
+    )
+
     this.setState((prevState) => ({
-      messages: [...prevState.messages, {
-        author: 'bot',
-        message:
-          messages[Math.floor(Math.random() * messages.length)]
-      }],
+      ...prevState,
       botMessageState: {
         ...prevState.botMessageState,
         inProcess: false
@@ -128,7 +130,7 @@ export default class App extends Component {
           <MessageField
             messages={this.state.messages}
             onChange={this.onChange.bind(this)}
-            onSend={this.onSend.bind(this)}
+            onSend={() => this.onSend(this.state.inputValue, 'user')}
             inputValue={this.state.inputValue}
           />
         </div>
@@ -136,3 +138,11 @@ export default class App extends Component {
     )
   }
 }
+
+const mapStateToProps = ({msgReducer}) => ({
+  messages: msgReducer.messages
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({sendMessage}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

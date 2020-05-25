@@ -29,11 +29,12 @@ export default function roomReducer(store = initialStore, action) {
 
     case ADD_ROOM: {
       const roomId = Object.keys(store.rooms).length + 1;
-      return  update(store, {
+      return update(store, {
         rooms: {
           $merge: {
             [roomId]: {
-              title: action.title, messageList: []
+              title: action.title,
+              messageList: []
             }
           }
         }
