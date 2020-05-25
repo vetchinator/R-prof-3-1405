@@ -1,4 +1,23 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #191c21;
 }
+
+h1 {
+    padding: 5px 15px;
+    font-size: 38px;
+    margin: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    margin-bottom: 0.3rem;
+}
+
+strong {
+    margin-top: 0.3rem;
+}
+
