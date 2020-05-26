@@ -1,0 +1,8 @@
+.message {
+    font-family: Arial, sans-serif;
+    color: #212121;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    padding: 4px 12px;
+}
