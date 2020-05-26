@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './layout/style/main.css';
 
-import Father from './components/Father.jsx';
+//redux
+import { Provider } from 'react-redux';
+import initStore from './store/store.js';
+
+import Layout from './layout/Layout.jsx';
 
 let container = document.getElementById('app')
 
-let arr = ['Dart Vader', 'Chewbakka', 'Master Yoda']
+let user = 'Loontik';
+
 
 ReactDom.render(
-    <Father heroes={arr}/>
-    , container);
+    <Provider store = { initStore() }>
+        <MuiThemeProvider>
+            <Layout user={ user } />
+        </MuiThemeProvider>
+    </Provider>
+    ,
+    container
+)
+

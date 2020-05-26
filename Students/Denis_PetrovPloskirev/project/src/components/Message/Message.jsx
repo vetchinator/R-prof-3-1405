@@ -1,11 +1,18 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-
 import './style.css';
 
 export default (props) => {
-  let { text } = props;
+  let { sender, text } = props;
   return (
-    <p className='message'>{text}</p>
+    <div className="msg">
+      <h3 className='authorMsg'>
+        {sender && <strong>{sender}</strong>}
+        {!sender && <strong>Bot</strong>}
+      </h3>
+        
+      
+
+      <p>{props.sender || (!props.sender && text) ? text : 'cyber answer...'}</p>
+    </div>
   )
 }
