@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {bindActionCreators} from 'redux'
-import connect from 'react-redux/es/connect/connect'
 import PropTypes from 'prop-types'
+
+import connect from 'react-redux/es/connect/connect'
 
 import {addRoom} from '../../store/actions/room-actions'
 
@@ -20,33 +21,42 @@ class ChatList extends Component {
   }
 
   static defaultProps = {
+    rooms: {},
     roomId: 1
   }
 
+  addRoom() {
+    const {rooms} = this.props
+    const roomId = Object.keys(rooms).length + 1
+    this.props.addRoom(`Чат ${roomId}`)
+  }
+
   render() {
-    const {roomId} = this.props
+    const {roomId, rooms} = this.props
+
+    const roomsArr = []
+
+    Object.keys(rooms).forEach((key) => {
+      roomsArr.push({
+        roomId: Number(key),
+        title: rooms[key].title
+      })
+    })
 
     return (
       <div className="chat-list">
         <div className="chat-list-rooms">
           <List>
             <ListSubheader component="div" className="subheader">Комнаты:</ListSubheader>
-            <Link to='/chat/1'>
-              <ListItem selected={roomId === 1}>Чат 1</ListItem>
-            </Link>
-            <Link to='/chat/2'>
-              <ListItem selected={roomId === 2}>Чат 2</ListItem>
-            </Link>
-            <Link to='/chat/3'>
-              <ListItem selected={roomId === 3}>Чат 3</ListItem>
-            </Link>
-            <Link to='/chat/4'>
-              <ListItem selected={roomId === 4}>Чат 4</ListItem>
-            </Link>
+            {roomsArr.map(room => (
+              <Link to={`/chat/${room.roomId}`} key={room.roomId}>
+                <ListItem selected={roomId === room.roomId}>{room.title}</ListItem>
+              </Link>
+            ))}
           </List>
         </div>
         <div className="chat-list-btn">
-          <Button color="primary">
+          <Button color="primary" onClick={() => this.addRoom()}>
             <AddIcon/>
             Добавить комнату
           </Button>
