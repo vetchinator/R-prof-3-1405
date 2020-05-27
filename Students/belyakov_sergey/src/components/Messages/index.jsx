@@ -45,7 +45,7 @@ class Messages extends Component {
 }
 
 const mapStateToProps = ({msgReducer}) => ({
-  messages: msgReducer.messages,
+  messages: msgReducer.messages
 })
 
 export default connect(mapStateToProps)(Messages)
