@@ -15,6 +15,7 @@ import {Button, List, ListItem, ListSubheader} from '@material-ui/core';
 
 class ChatList extends Component {
   static propTypes = {
+    showChatList: PropTypes.func.isRequired,
     rooms: PropTypes.object.isRequired,
     addRoom: PropTypes.func.isRequired,
     roomId: PropTypes.number
@@ -25,14 +26,14 @@ class ChatList extends Component {
     roomId: 1
   }
 
-  addRoom() {
-    const {rooms} = this.props
+  addNewRoom() {
+    const {rooms, addRoom} = this.props
     const roomId = Object.keys(rooms).length + 1
-    this.props.addRoom(`Чат ${roomId}`)
+    addRoom(`Чат ${roomId}`)
   }
 
   render() {
-    const {roomId, rooms} = this.props
+    const {roomId, rooms, showChatList} = this.props
 
     const roomsArr = []
 
@@ -50,13 +51,13 @@ class ChatList extends Component {
             <ListSubheader component="div" className="subheader">Комнаты:</ListSubheader>
             {roomsArr.map(room => (
               <Link to={`/chat/${room.roomId}`} key={room.roomId}>
-                <ListItem selected={roomId === room.roomId}>{room.title}</ListItem>
+                <ListItem onClick={showChatList} selected={roomId === room.roomId}>{room.title}</ListItem>
               </Link>
             ))}
           </List>
         </div>
         <div className="chat-list-btn">
-          <Button color="primary" onClick={() => this.addRoom()}>
+          <Button color="primary" onClick={() => this.addNewRoom()}>
             <AddIcon/>
             Добавить комнату
           </Button>

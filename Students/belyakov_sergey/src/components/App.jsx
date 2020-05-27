@@ -66,9 +66,9 @@ class App extends Component {
   }
 
   sendMessage(message, author) {
-    const {messages, roomId} = this.props
+    const {messages, roomId, sendMessage} = this.props
     const messageId = Object.keys(messages).length + 1
-    this.props.sendMessage(messageId, message, author, roomId)
+    sendMessage(messageId, message, author, roomId)
   }
 
   botSendMessage() {
@@ -87,6 +87,18 @@ class App extends Component {
       }
     }))
     this.onScroll();
+  }
+
+  showChatList() {
+    const chatList = document.querySelector('.chat-list');
+    const messageField = document.querySelector('.messages-field')
+    const menuIconOpen = document.querySelector('.menu-icon__open')
+    const menuIconClose = document.querySelector('.menu-icon__close')
+
+    chatList.classList.toggle('show')
+    messageField.classList.toggle('hidden')
+    menuIconOpen.classList.toggle('hidden')
+    menuIconClose.classList.toggle('hidden')
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -114,10 +126,14 @@ class App extends Component {
         disableGutters={true}
       >
         <Header
+          showChatList={this.showChatList}
           roomId={this.props.roomId}
         />
         <div className="wrapper">
-          <ChatList rooms={this.props.rooms} roomId={this.props.roomId}/>
+          <ChatList
+            showChatList={this.showChatList}
+            rooms={this.props.rooms}
+            roomId={this.props.roomId}/>
           <MessageField
             roomId={this.props.roomId}
             onChange={this.onChange.bind(this)}
