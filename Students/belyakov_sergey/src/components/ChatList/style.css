@@ -20,9 +20,10 @@
   display: none;
 }
 
-.chat-list h2 {
-  font-size: 20px;
+.chat-list .subheader {
+  text-align: center;
   text-transform: uppercase;
+  background-color: rgba(248, 248, 248, 0.9);
 }
 
 ul {
@@ -45,18 +46,13 @@ ul li {
   border-bottom: #cccccc 1px solid;
 }
 
+.chat-list a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, .7);
+}
+
 ul li:hover {
   background-color: rgba(0, 0, 0, .05);
-}
-
-.active:hover {
-  background-color: rgb(95, 119, 184);
-}
-
-.active {
-  color: #ffffff;
-
-  background-color: rgba(95, 119, 184, .9);
 }
 
 @media screen and (max-width: 768px) {

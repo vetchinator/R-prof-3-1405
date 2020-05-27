@@ -1,27 +1,33 @@
 import React, {Component} from 'react'
-
-import {sendMessage} from '../store/actions/message-actions'
+import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import connect from 'react-redux/es/connect/connect'
 
-import {Container} from "@material-ui/core"
+import {sendMessage} from '../store/actions/message-actions'
 
 import MessageField from './MessageField/index.jsx'
 import Header from './Header/index.jsx'
 import ChatList from './ChatList/index.jsx'
 
+import {Container} from "@material-ui/core"
+
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      inputValue: '',
-      botMessageState: {
-        botQueue: false,
-        inProcess: false,
-        messages: [
-          'Hello', 'Im fine, thanks)', 'How do you do?', 'By'
-        ]
-      }
+  static propTypes = {
+    roomId: PropTypes.number
+  }
+
+  static defaultProps = {
+    roomId: 1
+  }
+
+  state = {
+    inputValue: '',
+    botMessageState: {
+      botQueue: false,
+      inProcess: false,
+      messages: [
+        'Hello', 'Im fine, thanks)', 'How do you do?', 'By'
+      ]
     }
   }
 
@@ -104,18 +110,6 @@ class App extends Component {
     }
   }
 
-  showChatList() {
-    const chatList = document.querySelector('.chat-list');
-    const messageField = document.querySelector('.messages-field')
-    const menuIconOpen = document.querySelector('.menu-icon__open')
-    const menuIconClose = document.querySelector('.menu-icon__close')
-
-    chatList.classList.toggle('show')
-    messageField.classList.toggle('hidden')
-    menuIconOpen.classList.toggle('hidden')
-    menuIconClose.classList.toggle('hidden')
-  }
-
   render() {
     return (
       <Container
@@ -123,10 +117,10 @@ class App extends Component {
         disableGutters={true}
       >
         <Header
-          showChatList={this.showChatList}
+          roomId={this.props.roomId}
         />
         <div className="wrapper">
-          <ChatList/>
+          <ChatList roomId={this.props.roomId}/>
           <MessageField
             messages={this.state.messages}
             onChange={this.onChange.bind(this)}

@@ -1,0 +1,16 @@
+.profile {
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile a {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(63, 81, 186);
+}

@@ -7,7 +7,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        // точка входа до index.js
+        // точка входа до index.jsx
             main: path.resolve(__dirname, 'src', 'index.jsx')
     },
     output: {

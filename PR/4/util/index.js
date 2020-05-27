@@ -16,7 +16,7 @@ fs.mkdirSync (
 )
 
 // fs.writeFileSync (
-//     path.resolve (__dirname, '..', 'src', 'components', componentName, 'index.js'),
+//     path.resolve (__dirname, '..', 'src', 'components', componentName, 'index.jsx'),
 //     `export default from './${componentName}';`
 // )
 
@@ -32,5 +32,5 @@ if (args.stateless) {
 }
 
 //package.json ===> scripts
-// "c-full": "node util/index.js --n",
-// "c-less": "node util/index.js --s --n"
+// "c-full": "node util/index.jsx --n",
+// "c-less": "node util/index.jsx --s --n"
