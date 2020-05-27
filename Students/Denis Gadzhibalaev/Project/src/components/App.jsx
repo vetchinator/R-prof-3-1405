@@ -1,37 +1,19 @@
-import React from 'react'
-import shortid from 'shortid'
+import React from 'react';
+import ReactDom from 'react-dom';
 
-import Button from './Button/index.jsx'
+import MessageField from './MessageField/MessagesField.jsx';
+import ChatList from './ChatList/ChatList.jsx'
+import Header from './Header/Header.jsx';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-           messages: ['Все', 'у', 'нас']
-    }
-    }
-
-    addText = () => {
-       const changedMessages = this.state.messages
-       changedMessages.push('нормально!')
-       this.setState({
-           messages: changedMessages
-       })
-    }
-
-    render() {
-        const messages = this.state.messages.map(name => {
-            return(
-            <p className = "message" key = {shortid.generate()}>{name}</p>
-            )
-        });
-        return (
-        <div>
-            <Button addText = {this.addText} />
-            {messages}
+export default function App() {
+    let user = 'User1';
+    return (
+        <div className= "d-flex w-100 h-100 flex-column">
+            <Header />
+        <div className= "d-flex w-100 h-75">
+            <ChatList />
+            <MessageField user= {user} />
         </div>
-        )
-    }
+        </div>
+    )
 }
-
-export default App;

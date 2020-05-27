@@ -1,7 +1,27 @@
-.msg {
-    background-color: lightblue;
+.msg {    
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 18px;
-    margin: 5px;
+    margin: 5px 0;    
+}
+
+.msg span {
+    padding: 5px;
+    word-break: break-word;
+}
+
+.msg p {
+    
+    padding: 5px;
+    word-break: break-word;
+}
+
+.my-text {
+    background-color: rgb(116, 151, 248);
+    text-align: left;
+}
+
+.bot {
+    text-align: right;   
+    background-color: rgb(223, 223, 250); 
 }
