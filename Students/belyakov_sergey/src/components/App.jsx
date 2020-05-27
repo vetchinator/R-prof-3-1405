@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   state = {
-    inputValue: '',
+    inputValueMessage: '',
     botMessageState: {
       botQueue: false,
       inProcess: false,
@@ -41,20 +41,20 @@ class App extends Component {
       const inputValue = e.target.value
       this.setState((prevState) => ({
         ...prevState,
-        inputValue: inputValue
+        inputValueMessage: inputValue
       }))
     } else {
-      this.onSend(this.state.inputValue, 'user')
+      this.onSend(this.state.inputValueMessage, 'user')
     }
   }
 
   onSend(message, author) {
-    if (this.state.inputValue !== '') {
+    if (this.state.inputValueMessage !== '') {
       this.sendMessage(message, author)
 
       this.setState((prevState) => ({
         ...prevState,
-        inputValue: '',
+        inputValueMessage: '',
         botMessageState: {
           ...prevState.botMessageState,
           botQueue: true
@@ -66,12 +66,9 @@ class App extends Component {
   }
 
   sendMessage(message, author) {
-    const {messages} = this.props
+    const {messages, roomId} = this.props
     const messageId = Object.keys(messages).length + 1
-
-    const roomID = 1
-
-    this.props.sendMessage(messageId, message, author, roomID)
+    this.props.sendMessage(messageId, message, author, roomId)
   }
 
   botSendMessage() {
@@ -120,12 +117,12 @@ class App extends Component {
           roomId={this.props.roomId}
         />
         <div className="wrapper">
-          <ChatList roomId={this.props.roomId}/>
+          <ChatList rooms={this.props.rooms} roomId={this.props.roomId}/>
           <MessageField
-            messages={this.state.messages}
+            roomId={this.props.roomId}
             onChange={this.onChange.bind(this)}
-            onSend={() => this.onSend(this.state.inputValue, 'user')}
-            inputValue={this.state.inputValue}
+            onSend={() => this.onSend(this.state.inputValueMessage, 'user')}
+            inputValue={this.state.inputValueMessage}
           />
         </div>
       </Container>
@@ -133,8 +130,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({msgReducer}) => ({
-  messages: msgReducer.messages
+const mapStateToProps = ({msgReducer, roomReducer}) => ({
+  messages: msgReducer.messages,
+  rooms: roomReducer.rooms
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({sendMessage}, dispatch)

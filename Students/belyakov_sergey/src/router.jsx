@@ -14,8 +14,9 @@ export default class Router extends Component {
         <Route path='/chat/2/' render={() => <App roomId={2}/>} exact/>
         <Route path='/chat/3/' render={() => <App roomId={3}/>} exact/>
         <Route path='/chat/4/' render={() => <App roomId={4}/>} exact/>
-        <Route path='/profile/' component={Profile} exact />
+        <Route path='/profile/' component={Profile} exact/>
       </Switch>
     )
   }
 }
+

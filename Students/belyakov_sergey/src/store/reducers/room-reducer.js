@@ -5,10 +5,10 @@ import {ADD_ROOM} from "../actions/room-actions";
 
 const initialStore = {
   rooms: {
-    1: {title: 'Чат 1', messageList: [1]},
-    2: {title: 'Чат 2', messageList: [2]},
+    1: {title: 'Чат 1', messageList: []},
+    2: {title: 'Чат 2', messageList: []},
     3: {title: 'Чат 3', messageList: []},
-    4: {title: 'Чат 3', messageList: []}
+    4: {title: 'Чат 4', messageList: []}
   }
 }
 

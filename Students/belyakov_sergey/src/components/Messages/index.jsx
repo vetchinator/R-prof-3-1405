@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import connect from 'react-redux/es/connect/connect'
 
@@ -7,22 +8,28 @@ import Message from '../Message/index.jsx'
 import './style.css'
 
 class Messages extends Component {
-  constructor(props) {
-    super(props)
+  static propTypes = {
+    messages: PropTypes.object
+  }
+
+  static defaultProps = {
+    messages: {}
   }
 
   render() {
-    const {messages} = this.props
+    const {messages, roomId} = this.props
     let msgArr = []
 
     Object.keys(messages).forEach(key => {
-      msgArr.push({
-          messageId: key,
-          message: messages[key].message,
-          author: messages[key].author,
-          roomId: messages[key].roomId
-        }
-      )
+      if (messages[key].roomId === roomId) {
+        msgArr.push({
+            messageId: key,
+            message: messages[key].message,
+            author: messages[key].author,
+            roomId: messages[key].roomId
+          }
+        )
+      }
     })
 
     return (
@@ -38,7 +45,7 @@ class Messages extends Component {
 }
 
 const mapStateToProps = ({msgReducer}) => ({
-  messages: msgReducer.messages
+  messages: msgReducer.messages,
 })
 
 export default connect(mapStateToProps)(Messages)
