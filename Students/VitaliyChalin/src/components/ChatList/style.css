@@ -1,8 +1,16 @@
 .users__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 30%;
     height: calc(100% - 50px);
     padding: 20px;
     background-color: #252932;
+    overflow: hidden;
+}
+
+.users__list {
+    height: 90%;
     overflow-y: auto;
 }
 
@@ -65,4 +73,17 @@
     width: 17px;
     height: 15px;
     border-bottom: 3px dotted #fff;
+}
+
+.user__add {
+    color: #fff !important;
+    transition: color 450ms;
+}
+
+.user__add:hover {
+    color: #252932 !important;
+}
+
+.user__input {
+    color: #fff !important;
 }

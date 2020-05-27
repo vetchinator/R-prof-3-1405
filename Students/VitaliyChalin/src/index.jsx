@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import 'bootstrap';
+/* import 'bootstrap'; */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider.js';
 
@@ -11,18 +11,18 @@ import { Provider } from 'react-redux';
 import initStore from './store/store.js';
 
 // components
-//import ChatList from './components/ChatList/ChatList.jsx';
-import Layout from './components/Layout/Layout.jsx';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router.jsx';
 
 let container = document.getElementById('app');
 
-let user = 'Loontik';
-
 ReactDom.render(
-    <Provider store={ initStore() }>
-        <MuiThemeProvider>
-            <Layout user={ user } />
-        </MuiThemeProvider>
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={ initStore() }>
+            <MuiThemeProvider>
+                <Router />
+            </MuiThemeProvider>
+        </Provider>
+    </BrowserRouter>,
     container
 );

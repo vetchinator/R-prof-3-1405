@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
 
@@ -21,6 +22,14 @@ class MessagesField extends Component {
         }
     }
 
+    static propTypes = {
+        chatId: PropTypes.number,
+        userName: PropTypes.string
+    }
+    static defaultProps = {
+        chatId: 0
+    }
+
     handleSend = (sender, text) => {
         this.setState({ text: '' });
         if (sender == this.state.user) {
@@ -29,7 +38,6 @@ class MessagesField extends Component {
     }
 
     handleChange = (evt) => {
-        //if (evt.keyCode !== 13) this.setState({ text: evt.target.value });
         evt.keyCode !== 13 ? this.setState({ text: evt.target.value }) : this.handleSend(this.state.user, this.state.text);
     }
 
