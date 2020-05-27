@@ -1,37 +1,56 @@
-//import React from 'react';
-//import ReactDom from 'react-dom';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import {List, ListItem} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import grey400 from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 import './style.css';
 
-export default class Message extends Component {
+const iconButtonElement = (
+    <IconButton
+      touch={true}
+      tooltip="more"
+      tooltipPosition="bottom-left"
+    >
+      <MoreVertIcon color={grey400} />
+    </IconButton>
+  );
+  
+const rightIconMenu = (
+<IconMenu iconButtonElement={iconButtonElement}>
+    <MenuItem>Reply</MenuItem>
+    <MenuItem>Forward</MenuItem>
+    <MenuItem>Delete</MenuItem>
+</IconMenu>
+);
 
-    render() {
-        
-        return (
-            <div className={this.props.sender ?
-                'text__wrapper text__wrapper--'+this.props.sender :
-                'text__wrapper text__wrapper--Bot'}>
-                { this.props.sender && <strong>{ this.props.sender }</strong> }
-                { !this.props.sender && <strong>Bot</strong> }
-                { (this.props.sender && this.props.text) && <p className="text__user">{ this.props.text }</p> }
-                { (!this.props.sender && !this.props.text) && <p className="text__bot">cyber answer...</p> }
-            </div>
-        )
-    }
-}
-
-/* export default (props) => {
+export default (props) => {
 
     let { sender, text } = props;
 
+    sender ? sender = sender : sender = 'Bot';
+
     return (
-        <div className={sender ? 'text__wrapper text__wrapper--'+sender : 'text__wrapper text__wrapper--Bot'}>
-            { sender && <strong>{ sender }</strong> }
-            { !sender && <strong>Bot</strong> }
-            { (props.sender && text) && <p className="text__user">{ text }</p> }
-            { (props.sender && !text) && <p className="text__bot text__bot--notext">Чтобы я смог ответить, отправьте текст...</p> }
-            { (!props.sender && !text) && <p className="text__bot">cyber answer...</p> }
-        </div>
+        <ListItem
+            className={sender ?
+                'message__wrapper message__wrapper--'+sender :
+                'message__wrapper message__wrapper--Bot'}
+            leftAvatar={<Avatar src="https://via.placeholder.com/64" className="user__avatar" />}
+            rightIconButton={ rightIconMenu }
+            primaryText={ sender }
+            secondaryText={
+            <p>
+                { text }
+            </p>
+            }
+            secondaryTextLines={2}
+            style={{
+                border: "1px solid #bbc5dd",
+                borderRadius: "10px",
+                marginBottom: "15px"
+            }}
+        />
     )
-}; */
+};

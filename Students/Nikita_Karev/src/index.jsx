@@ -4,16 +4,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './layout/style/main.css';
 
+//redux
+import { Provider } from 'react-redux';
+import initStore from './store/store.js';
+
+//components
 import MessagesField from './components/MessageField/MessageField.jsx';
+
+//material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let container = document.getElementById('app');
 
 let user = 'DefaultUser';
 
 ReactDom.render(
-    <div className="d-flex justify-content-center w-100">
-        <MessagesField user={ user }/>    
-    </div>
+    <MuiThemeProvider>
+        <Provider store = { initStore() }>
+            <div className = "d-flex justify-content-center w-100">
+                <MessagesField user = { user }/>    
+            </div>
+        </Provider>
+    </MuiThemeProvider>
     ,
     container);
 

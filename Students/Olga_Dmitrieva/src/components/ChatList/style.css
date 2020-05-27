@@ -1,0 +1,11 @@
+.chatList-list {
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #7952B3;
+    border-color: #7952B3;
+}
+
