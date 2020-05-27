@@ -1,7 +1,44 @@
 .msg {
-    background-color: lightblue;
+    background-color: #1c2127;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 18px;
     margin: 5px;
+    color: white;
 }
+ 
+.layout {
+    height: 100%;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.message-field {
+    display: flex;
+    flex-direction: column;
+    background-color: #111419;
+    max-height: 350px;
+    width: 100%;
+    padding: 20px;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+ 
+.message-sender {
+    color: white;
+    font-size: 18px;
+    text-align: right;
+    background-color: #3e4b5e;
+    width: 45%;
+    margin-left: 55%;
+}
+
+.message-bot {
+    width: 45%;
+    margin-right: 50%;    
+}
+ 
