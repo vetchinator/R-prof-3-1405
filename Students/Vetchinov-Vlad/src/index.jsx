@@ -1,36 +1,19 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import 'bootstrap';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './layout/style/main.css';
 
-//import TestComp from './components/TestComponent/index.jsx';
+import MessagesField from './components/MessageField/MessageField.jsx';
 
 let container = document.getElementById('app');
 
-let messages = ['Привет', 'Как дела?'];
-
-const handleClick = () => {
-    messages.push('Нормально');
-    
-    ReactDom.render(
-        <MessageField messages = { messages } />
-        , container);
-}
-
-const Message = props => <div>{ props.text }</div>;
-
-let MessageField = props => {
-    let msgArr = props.messages.map(text => {
-        return (<Message text={ text } />);
-    });
-    return (<div>
-                <div>{ msgArr }</div>
-                <button onClick={ handleClick }>Добавить</button>
-            </div>
-    );
-}
+let user = 'Loontik';
 
 ReactDom.render(
-    <MessageField messages = { messages } />
-    , container);
+    <div className="d-flex w-100 justify-content-center">
+        <MessagesField user={ user } />
+    </div>
+    ,
+    container
+);
