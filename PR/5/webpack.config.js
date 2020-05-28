@@ -5,6 +5,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
+        //точка входа
         main: path.resolve(__dirname, 'src', 'index.jsx')
     },
     output: {
@@ -44,6 +45,5 @@ module.exports = {
             filename: 'index.html',
             template: path.resolve(__dirname, 'src', 'public', 'index.html')
         })
-    ],
-    devServer: { historyApiFallback: true }
+    ]
 }
