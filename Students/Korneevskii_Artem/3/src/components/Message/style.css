@@ -1,0 +1,19 @@
+.message-wrap {
+    background-color: lightblue;
+    margin: 10px;    
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 17px;
+}
+
+.message-wrap p {
+    margin: 0;
+}
+
+.message-wrap.user {
+    background-color: lightgray;
+}
+
+.message-wrap.bot {
+    background-color: lightblue;
+}

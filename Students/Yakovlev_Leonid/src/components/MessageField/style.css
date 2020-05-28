@@ -1,0 +1,10 @@
+.enter-text {
+    margin: 10px 0;
+}
+
+.chat-text {
+    width: 900px;
+    margin: 0 15px; 
+    border-left:1px solid rgb(224, 225, 236);
+    padding-left:15px;
+}   
