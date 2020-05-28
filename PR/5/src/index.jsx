@@ -17,15 +17,15 @@ import Router from './router.jsx';
 let container = document.getElementById('app')
 
 ReactDom.render(
-    <BrowserRouter>
         <Provider store = { initStore() }>
-            <div className = "d-flex w-100 justify-content-center">
-                <MuiThemeProvider>
-                    <Router />
-                </MuiThemeProvider>
-            </div>
+            <BrowserRouter>
+                <div className = "d-flex w-100 justify-content-center">
+                    <MuiThemeProvider>
+                        <Router />
+                    </MuiThemeProvider>
+                </div>
+            </BrowserRouter>
         </Provider>
-    </BrowserRouter>
     ,
     container
 )
