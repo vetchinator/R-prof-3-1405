@@ -11,13 +11,13 @@ export default (props) => {
                 <strong>{ sender }</strong> 
                 <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer...' }</p>
             </div>
-        )
+        );
     } else {
         return (
-            <div className= 'd-flex flex-column msgbot' >
+            <div className= 'd-flex flex-column msgbot'>
                  <strong>Bot</strong> 
                 <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer...' }</p>
             </div>
-        )
-    }
+        );
+    };
 };
