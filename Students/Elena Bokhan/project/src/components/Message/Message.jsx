@@ -5,7 +5,7 @@ export default (props) => {
     let { sender, text } = props;
     
     return (
-        <div className="d-flex flex-column msg">
+        <div className={`d-flex flex-column msg + ${props.sender != 'Me'? "msgBot": "msgSender"}`}  > 
             { sender && <strong>{ sender }</strong> }
             { !sender && <strong>Bot</strong> }
             <p>{ props.sender || (!props.sender && text) ? text : 'cyber answer...' }</p>
