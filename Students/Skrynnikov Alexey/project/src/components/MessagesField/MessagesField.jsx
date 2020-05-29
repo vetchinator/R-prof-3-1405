@@ -34,26 +34,9 @@ class MessagesField extends Component {
 
     handleChange = (evt) => {
         if (evt.keyCode !== 13) this.setState({ text: evt.target.value });
-        // evt.keyCode !== 13 ?
-        //     this.setState({ text: evt.target.value }) :
-        //     this.handleSend(evt)
-    };
-
-    // componentDidUpdate() {
-    //     if(this.state.messages[this.state.messages.length - 1].user && this.state.messages.length % 2 == 1){
-    //         setTimeout(() => {
-    //             this.setState({
-    //                 messages: [...this.state.messages, {
-    //                   user: null,
-    //                   text: 'Bot answers'
-    //                 }]
-    //             })
-    //         }, 500);
-    //     }
-    // }    
+    };   
 
     render() {
-        // let { user } = this.props;
         let { messages } = this.props;
 
         let msgArr = [];
@@ -65,7 +48,7 @@ class MessagesField extends Component {
                 key = { key }/>)
         });
 
-        return (<div className="d-flex flex-column w-50">
+        return (<div className="d-flex flex-column w-100">
                     <div>
                         { msgArr }
                     </div>
@@ -81,12 +64,12 @@ class MessagesField extends Component {
                         onKeyUp={ this.handleChange }
                         value={ this.state.text }
                         />
-                        <FloatingActionButton className="ml-3" onClick={ () => this.handleSend(this.state.text, 'Me') }>
+                        <FloatingActionButton className="ml-4" onClick={ () => this.handleSend(this.state.text, 'Me') }>
                             <SendIcon />
                         </FloatingActionButton>  
                     </div>
                 </div>    
-                )
+                );
     };
 }
 
