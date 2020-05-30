@@ -41,7 +41,6 @@ deleteChat = (e) => {
   e.preventDefault();
   let id = e.nativeEvent.target.dataset.id ? e.nativeEvent.target.dataset.id : e.nativeEvent.target.parentElement.dataset.id
   this.props.deleteChat(id);
-  this.setState({input: ''});
 }
 
   render() {

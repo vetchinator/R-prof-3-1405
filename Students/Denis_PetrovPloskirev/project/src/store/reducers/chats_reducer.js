@@ -39,8 +39,21 @@ export default function chatsReducer(store = initialStore, action) {
     };
     case DEL_CHAT: {
       let chatId = action.id;
-      let newStore = {...store};
-      delete newStore['chats'][chatId];
+      let newStore = {chats: {}};
+      for (let key in store.chats) {
+        if (key != chatId) {
+          newStore = update(newStore, {
+            chats: {
+              $merge: {
+                [key]: {
+                  title: store.chats[key].title,
+                  messagesList: []
+                }
+              }
+            }
+          });
+        }
+      }
       return newStore;
     }
     default:
