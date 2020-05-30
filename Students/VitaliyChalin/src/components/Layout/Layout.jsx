@@ -10,23 +10,27 @@ import './style.css';
 
 export default class Layout extends React.Component {
     static propTypes = {
-        chatId: PropTypes.number,
-        userName: PropTypes.string
+        chatId: PropTypes.string,
+        userName: PropTypes.string,
+        pathCode: PropTypes.string
     };
     static defaultProps = {
-        chatId: 0,
+        chatId: '',
+        pathCode: ''
     };
 
     render() {
-        let user = 'Me';
         let userName = this.props.userName;
-        
+        let pathCode = this.props.pathCode;
+
         return (
             <div className="layout__wrapper">
                 <Header chatId={ this.props.chatId } userName={ userName } />
-                <ChatList chatId={ this.props.chatId } />
-                { userName !== 'Me' && <MessageField user={ user } /> }
-                { userName === 'Me' && <Profile /> }
+                { pathCode !== 'profile' && <ChatList chatId={ this.props.chatId } /> }
+                { pathCode !== 'profile' && <MessageField chatId={ this.props.chatId } /> }
+                { pathCode === 'profile' && <ChatList chatId={ this.props.chatId } widthCont={ '20%' } /> }
+                { pathCode === 'profile' && <MessageField chatId={ this.props.chatId } widthCont={ '60%' } /> }
+                { pathCode === 'profile' && <Profile chatId={ this.props.chatId } /> }
             </div>
         )
     }

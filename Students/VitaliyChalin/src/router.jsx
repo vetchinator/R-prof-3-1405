@@ -4,28 +4,64 @@ import { Switch, Route } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout.jsx';
 
-export default class Router extends React.Component {
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class Router extends React.Component {
 
     render() {
+        let { chats } = this.props;
+
+        let routesArray = Object.keys(chats).map(key => (
+            <Route 
+                key={ key }
+                exact
+                path={ `/chat/${ key }/` }
+                render={ (props) => <Layout
+                                        chatId={ key }
+                                        userName={ chats[key].title }
+                                    />
+                }
+            />
+        ));
+
+        let routesProfileArray = Object.keys(chats).map(key => (
+            <Route 
+                key={ key }
+                exact
+                path={ `/chat/${ key }/profile/` }
+                render={ (props) => <Layout
+                                        chatId={ key }
+                                        userName={ chats[key].title }
+                                        pathCode={ 'profile' }
+                                    />
+                }
+            />
+        ));
                 
         return(
             <Switch>
                 <Route exact path = '/'
-                    render={ (props) => <Layout chatId={ 0 } userName={ props.location.userName } /> }
+                    render={ (props) => <Layout chatId={ '' } userName={ props.location.userName } /> }
                 />
-                <Route 
-                    exact
-                    path='/chat/:chatId/'
-                    render={ (props) => <Layout
-                                            chatId={ Number(props.match.params.chatId) }
-                                            userName={ props.location.userName }
-                                        />
-                    }
-                />
+                { routesArray }
                 <Route exact path = '/profile/'
-                    render={ () => <Layout chatId={ 1000 } userName={ 'Me' } /> }
+                    render={ () => <Layout
+                                        chatId={ 'me' }
+                                        userName={ 'Me' }
+                                        pathCode={ 'profile' }
+                                    /> }
                 />
+                { routesProfileArray }
             </Switch>
         )
     }
 }
+
+const mapStateToProps = ({ chatsReducer }) => ({
+    chats: chatsReducer.chats
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Router);
