@@ -8,9 +8,14 @@
 }
 
 .profile .input-name {
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #cccccc;
+  box-shadow: 1px 1px 2px 0 #cccccc;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 100px;
+  height: 400px;
   justify-content: space-between;
 }
 
