@@ -50,7 +50,10 @@ export default class Header extends React.Component {
                               style={{
                                 textDecoration: 'none',
                                 color: 'whitesmoke',
-                              }}>
+                              }}
+                              user={this.props.user}
+                              date={this.props.date}
+                              bio={this.props.bio}>
                               <AccountCircle />
                             </Link>
                           </Button>

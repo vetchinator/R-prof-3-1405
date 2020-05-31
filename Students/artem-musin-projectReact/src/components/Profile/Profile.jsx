@@ -1,9 +1,16 @@
 import React from 'react';
 import { Grid, Typography, Paper, Divider, Box } from '@material-ui/core';
+import { RaisedButton } from 'material-ui';
+
+import PropTypes from 'prop-types';
+
+import { setName, setBio, setDate } from '../../store/actions/profile_actions.js'
+import { bindActionCreators } from 'redux';
+import connect from 'react-redux/es/connect/connect';
+
+
 
 import './style.css'
-import { TagFaces } from '@material-ui/icons';
-import { Chip } from 'material-ui';
 
 const paperStyle = {
     paddingTop: '2em',
@@ -26,9 +33,28 @@ const ulStyle = {
     listStyleType: 'none'
 }
 
-export default class Profile extends React.Component {
- 
+class Profile extends React.Component {
+
+    static propTypes = {
+        user: PropTypes.string,
+        date: PropTypes.string,
+        bio: PropTypes.string
+    }
+
+    static defaultProps = {
+        user: 'Artem',
+        date: '21/01/1998',
+        bio: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+    }
+
+    handleInfo = () => {
+        console.log(this.props.user);
+        console.log(this.props.date);
+        console.log(this.props.bio);
+    }
+
     render() {
+
     
         return (
             <Paper
@@ -57,7 +83,7 @@ export default class Profile extends React.Component {
                                 direction="column">
                                     <Divider />
                                     <Typography variant="subtitle1">
-                                        Name: Artem
+                                        Name: { this.props.user }
                                     </Typography>
                                     <Divider />
                                     <Typography variant="subtitle1">
@@ -65,7 +91,7 @@ export default class Profile extends React.Component {
                                     </Typography>
                                     <Divider />
                                     <Typography variant="subtitle1">
-                                        Date of born: 21/01/1998 
+                                        Date of born: { this.props.date }
                                     </Typography>
                                     <Divider />
                             </Grid>
@@ -84,8 +110,7 @@ export default class Profile extends React.Component {
                                     </Typography>
                                         <Box component="div">
                                             <Typography variant="body1">
-                                                I'm a not professional JS or React developer. Imma just a guy who want to learn it.
-                                                And i'm learning with my mates from GeekBrains, supported by Vue Developer Sergey T.
+                                                { this.props.bio }
                                             </Typography>
                                         </Box>
                                 </Grid>
@@ -107,7 +132,7 @@ export default class Profile extends React.Component {
                                     </Typography>
                                         <Box component="ul"
                                         style={ulStyle}>
-                                            
+                                        
                                         </Box>
                                 </Grid>
                         </Grid>
@@ -118,3 +143,13 @@ export default class Profile extends React.Component {
 
     }
 }
+
+const mapStateToProps = ({ prflReducer }) => ({
+    user: prflReducer.user,
+    date: prflReducer.date,
+    bio: prflReducer.bio
+  });  
+
+  const mapDispatchToProps = dispatch => bindActionCreators({ setName, setBio, setDate }, dispatch);
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Profile); 
