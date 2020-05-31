@@ -10,6 +10,7 @@ import Header from './Header/index.jsx'
 import ChatList from './ChatList/index.jsx'
 
 import {Container} from "@material-ui/core"
+import roomReducer from "../store/reducers/room-reducer";
 
 class Layout extends Component {
   static propTypes = {
@@ -123,7 +124,7 @@ class Layout extends Component {
   }
 
   render() {
-    const {roomId, user} = this.props
+    const {roomId, user, rooms} = this.props
     const {inputValueMessage} = this.state
 
     return (
@@ -132,6 +133,7 @@ class Layout extends Component {
         disableGutters={true}
       >
         <Header
+          rooms={rooms}
           user={user.name}
           showChatList={this.showChatList}
           roomId={roomId}
@@ -153,8 +155,9 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = ({msgReducer, userReducer}) => ({
+const mapStateToProps = ({msgReducer, userReducer, roomReducer}) => ({
   messages: msgReducer.messages,
+  rooms: roomReducer.rooms,
   user: userReducer.user
 })
 

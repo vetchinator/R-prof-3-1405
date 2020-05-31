@@ -13,7 +13,8 @@ export default class Header extends Component {
   static propTypes = {
     roomId: PropTypes.number,
     showChatList: PropTypes.func.isRequired,
-    user: PropTypes.string.isRequired
+    user: PropTypes.string.isRequired,
+    rooms: PropTypes.object.isRequired
   }
 
   static defaultProps = {
@@ -21,7 +22,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const {roomId, showChatList, user} = this.props
+    const {rooms, roomId, showChatList, user} = this.props
 
     return (
       <div className="header">
@@ -35,7 +36,7 @@ export default class Header extends Component {
         </div>
         <div className="header-bg">
           <h1>Chat-App</h1>
-          <h2>@Чат {roomId}</h2>
+          <h2>@{rooms[roomId].title}</h2>
           <div className="user-link">
             <Link to='/profile/'>
               {user}

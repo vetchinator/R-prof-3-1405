@@ -34,10 +34,10 @@ ul {
 }
 
 ul li {
+  display: flex;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block;
   width: 100%;
   line-height: 35px;
   padding: 10px;
@@ -46,7 +46,24 @@ ul li {
   border-bottom: #cccccc 1px solid;
 }
 
+ul li svg {
+  opacity: 0;
+}
+
+ul li:hover svg {
+  opacity: .2;
+}
+
+ul li svg:hover {
+  opacity: .5;
+}
+
+.room-title {
+  flex: 1;
+}
+
 .chat-list a {
+  width: 100%;
   text-decoration: none;
   color: rgba(0, 0, 0, .7);
 }

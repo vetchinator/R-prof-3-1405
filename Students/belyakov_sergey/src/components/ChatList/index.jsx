@@ -5,12 +5,13 @@ import PropTypes from 'prop-types'
 
 import connect from 'react-redux/es/connect/connect'
 
-import {addRoom} from '../../store/actions/room-actions'
+import {addRoom, renameRoom} from '../../store/actions/room-actions'
 
 import './style.css'
 
 import AddIcon from '@material-ui/icons/Add'
-import {Button, List, ListItem, ListSubheader} from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit'
+import {Button, List, ListItem, ListSubheader} from '@material-ui/core'
 
 
 class ChatList extends Component {
@@ -18,18 +19,23 @@ class ChatList extends Component {
     showChatList: PropTypes.func.isRequired,
     rooms: PropTypes.object.isRequired,
     addRoom: PropTypes.func.isRequired,
+    renameRoom: PropTypes.func.isRequired,
     roomId: PropTypes.number
   }
 
   static defaultProps = {
-    rooms: {},
     roomId: 1
   }
 
   addNewRoom() {
-    const {rooms, addRoom} = this.props
-    const roomId = Object.keys(rooms).length + 1
-    addRoom(`Чат ${roomId}`)
+    const {addRoom} = this.props
+    addRoom(`Новый чат`)
+  }
+
+  changeTitleRoom(roomId) {
+    const {rooms, renameRoom} = this.props
+    const title = window.prompt('Новое значение', rooms[roomId].title)
+    renameRoom(roomId, title)
   }
 
   render() {
@@ -50,9 +56,18 @@ class ChatList extends Component {
           <List>
             <ListSubheader component="div" className="subheader">Комнаты:</ListSubheader>
             {roomsArr.map(room => (
-              <Link to={`/chat/${room.roomId}`} key={room.roomId}>
-                <ListItem onClick={showChatList} selected={roomId === room.roomId}>{room.title}</ListItem>
-              </Link>
+
+              <ListItem
+                onClick={showChatList}
+                selected={roomId === room.roomId}
+                key={room.roomId}
+              >
+                <Link to={`/chat/${room.roomId}`}>
+                  <div className="room-title">{room.title}</div>
+                </Link>
+                <EditIcon onClick={() => this.changeTitleRoom(room.roomId)}/>
+              </ListItem>
+
             ))}
           </List>
         </div>
@@ -71,6 +86,6 @@ const mapStateToProps = ({roomReducer}) => ({
   rooms: roomReducer.rooms
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({addRoom}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({addRoom, renameRoom}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList)

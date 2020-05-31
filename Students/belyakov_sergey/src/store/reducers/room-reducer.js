@@ -1,6 +1,6 @@
 import update from 'react-addons-update'
 
-import {ADD_ROOM} from "../actions/room-actions";
+import {ADD_ROOM, RENAME_ROOM} from "../actions/room-actions";
 
 const initialStore = {
   rooms: {
@@ -21,6 +21,18 @@ export default function roomReducer(store = initialStore, action) {
           $merge: {
             [roomId]: {
               title: action.title,
+            }
+          }
+        }
+      })
+    }
+
+    case RENAME_ROOM: {
+      return update(store, {
+        rooms: {
+          [action.roomId]: {
+            $set: {
+              title: action.title
             }
           }
         }
