@@ -8,23 +8,25 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //redux
 import { Provider } from 'react-redux';
-import initStore from './store/store.js';
+import { initStore, history } from './store/store.js';
+
+import { ConnectedRouter } from 'connected-react-router';
 
 //components
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import Router from './router.jsx';
 
 let container = document.getElementById('app')
 
 ReactDom.render(
         <Provider store = { initStore() }>
-            <BrowserRouter>
+            <ConnectedRouter history = { history }>
                 <div className = "d-flex w-100 justify-content-center">
                     <MuiThemeProvider>
                         <Router />
                     </MuiThemeProvider>
                 </div>
-            </BrowserRouter>
+            </ConnectedRouter>
         </Provider>
     ,
     container
