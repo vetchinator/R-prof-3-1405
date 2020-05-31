@@ -23,10 +23,11 @@ module.exports = {
         publicPath: '',
         filename: path.join('js', 'bundle.js')
     },
-    target: 'web', // настройка типа сборки
+    target: 'web',    // настройка типа сборки
 
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -34,9 +35,7 @@ module.exports = {
                     presets: ["@babel/preset-env", "@babel/preset-react"],
                     plugins: [
                         [
-                            "@babel/plugin-proposal-class-properties", {
-                                "loose": true
-                            }
+                            "@babel/plugin-proposal-class-properties", {"loose": true}
                         ]
                     ]
                 }
@@ -54,7 +53,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve(__dirname, 'src', 'public', 'index.html') // template свойство - для копии собственного html
+            template: path.resolve(__dirname, 'src', 'public', 'index.html')    // template свойство - для копии собственного html
         })
 
     ]
