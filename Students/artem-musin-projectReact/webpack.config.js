@@ -6,35 +6,40 @@ const path = require('path');
 
 
 module.exports = {
+
+    devServer: {
+        port: 8080,
+        historyApiFallback: {
+            index: 'index.html'
+        },
+    },
+
     entry: {
         // точка входа до index.js
-            main: path.resolve(__dirname, 'src', 'index.jsx')
+        main: path.resolve(__dirname, 'src', 'index.jsx')
     },
     output: {
-            path: path.join(__dirname, 'dist'),
-            publicPath: '',
-            filename: path.join('js', 'bundle.js')
+        path: path.join(__dirname, 'dist'),
+        publicPath: '',
+        filename: path.join('js', 'bundle.js')
     },
-<<<<<<< Updated upstream
-    target: 'web', // настройка типа сборки 
-=======
-    target: 'web',    // настройка типа сборки
+    target: 'web', // настройка типа сборки
 
->>>>>>> Stashed changes
     module: {
-        rules: [
-            {
-                 test: /\.(js|jsx)$/,
-                 exclude: /node_modules/,
-                 loader: 'babel-loader',
-                 options: {
-                     presets: ["@babel/preset-env", "@babel/preset-react"],
-                     plugins: [
-                         [
-                             "@babel/plugin-proposal-class-properties", {"loose": true}
-                         ]
-                     ]
-                 }
+        rules: [{
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {
+                    presets: ["@babel/preset-env", "@babel/preset-react"],
+                    plugins: [
+                        [
+                            "@babel/plugin-proposal-class-properties", {
+                                "loose": true
+                            }
+                        ]
+                    ]
+                }
             },
             {
                 test: /\.css$/i,
@@ -49,7 +54,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve(__dirname, 'src', 'public', 'index.html')    // template свойство - для копии собственного html
+            template: path.resolve(__dirname, 'src', 'public', 'index.html') // template свойство - для копии собственного html
         })
 
     ]
