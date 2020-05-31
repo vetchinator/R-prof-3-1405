@@ -17,7 +17,7 @@ class Messages extends Component {
   }
 
   render() {
-    const {messages, roomId} = this.props
+    const {messages, roomId, user} = this.props
     let msgArr = []
 
     Object.keys(messages).forEach(key => {
@@ -36,7 +36,11 @@ class Messages extends Component {
       <div className="messages">
         {
           msgArr.map((message, index) => (
-            <Message author={message.author} message={message.message} key={index}/>
+            <Message
+              user={user}
+              author={message.author}
+              message={message.message}
+              key={index}/>
           ))
         }
       </div>

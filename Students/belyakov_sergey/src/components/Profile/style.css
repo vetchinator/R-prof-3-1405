@@ -1,9 +1,50 @@
 .profile {
+  height: 75vh;
   margin: auto auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.profile .input-name {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-between;
+}
+
+.profile .input-name-field svg {
+  fill: #cccccc;
+}
+
+.profile .input-name-field svg.incorrect {
+  fill: #ff0011;
+}
+
+.profile .input-name-field svg.accept {
+  fill: #255803;
+}
+
+.input-name-btn {
+  margin: 0 auto;
+}
+
+.input-name-btn button.inactive {
+  background-color: #cccccc;
+  cursor: default;
+}
+
+.input-name-btn button.inactive:hover {
+  background-color: #cccccc;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+  0 2px 2px 0 rgba(0, 0, 0, 0.14),
+  0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.profile .MuiFormControl-root .MuiTextField-root {
+  flex: 1;
+  opacity: 0.7;
 }
 
 .profile a {

@@ -12,13 +12,14 @@ import {BrowserRouter} from 'react-router-dom'
 import Router from './router.jsx'
 
 ReactDom.render(
-  <BrowserRouter>
-    <Provider store={initStore()}>
+  <Provider store={initStore()}>
+    <BrowserRouter>
       <CssBaseline>
         <Router/>
       </CssBaseline>
-    </Provider>
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
+
   ,
   document.querySelector('#app')
 )

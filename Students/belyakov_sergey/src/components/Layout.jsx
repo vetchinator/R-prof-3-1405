@@ -11,9 +11,11 @@ import ChatList from './ChatList/index.jsx'
 
 import {Container} from "@material-ui/core"
 
-class App extends Component {
+class Layout extends Component {
   static propTypes = {
-    roomId: PropTypes.number
+    roomId: PropTypes.number,
+    sendMessage: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   }
 
   static defaultProps = {
@@ -44,13 +46,14 @@ class App extends Component {
         inputValueMessage: inputValue
       }))
     } else {
-      this.onSend(this.state.inputValueMessage, 'user')
+      const user = this.props.user.name
+      this.onSend(this.state.inputValueMessage, user)
     }
   }
 
   onSend(message, author) {
     if (this.state.inputValueMessage !== '') {
-      this.sendMessage(message, author)
+      this.sendNewMessage(message, author)
 
       this.setState((prevState) => ({
         ...prevState,
@@ -65,7 +68,7 @@ class App extends Component {
 
   }
 
-  sendMessage(message, author) {
+  sendNewMessage(message, author) {
     const {messages, roomId, sendMessage} = this.props
     const messageId = Object.keys(messages).length + 1
     sendMessage(messageId, message, author, roomId)
@@ -74,7 +77,7 @@ class App extends Component {
   botSendMessage() {
     const {messages} = this.state.botMessageState
 
-    this.sendMessage(
+    this.sendNewMessage(
       messages[Math.floor(Math.random() * messages.length)],
       'bot'
     )
@@ -120,25 +123,29 @@ class App extends Component {
   }
 
   render() {
+    const {roomId, user} = this.props
+    const {inputValueMessage} = this.state
+
     return (
       <Container
         maxWidth="lg"
         disableGutters={true}
       >
         <Header
+          user={user.name}
           showChatList={this.showChatList}
-          roomId={this.props.roomId}
+          roomId={roomId}
         />
         <div className="wrapper">
           <ChatList
             showChatList={this.showChatList}
-            rooms={this.props.rooms}
-            roomId={this.props.roomId}/>
+            roomId={roomId}/>
           <MessageField
-            roomId={this.props.roomId}
+            user={user.name}
+            roomId={roomId}
             onChange={this.onChange.bind(this)}
-            onSend={() => this.onSend(this.state.inputValueMessage, 'user')}
-            inputValue={this.state.inputValueMessage}
+            onSend={() => this.onSend(inputValueMessage, user.name)}
+            inputValue={inputValueMessage}
           />
         </div>
       </Container>
@@ -146,11 +153,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({msgReducer, roomReducer}) => ({
+const mapStateToProps = ({msgReducer, userReducer}) => ({
   messages: msgReducer.messages,
-  rooms: roomReducer.rooms
+  user: userReducer.user
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({sendMessage}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

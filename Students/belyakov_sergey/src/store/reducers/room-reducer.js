@@ -28,6 +28,6 @@ export default function roomReducer(store = initialStore, action) {
     }
 
     default:
-      return store;
+      return store
   }
 }

@@ -12,7 +12,8 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox'
 export default class Header extends Component {
   static propTypes = {
     roomId: PropTypes.number,
-    showChatList: PropTypes.func.isRequired
+    showChatList: PropTypes.func.isRequired,
+    user: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -20,7 +21,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const {roomId, showChatList} = this.props
+    const {roomId, showChatList, user} = this.props
 
     return (
       <div className="header">
@@ -37,7 +38,7 @@ export default class Header extends Component {
           <h2>@Чат {roomId}</h2>
           <div className="user-link">
             <Link to='/profile/'>
-              User
+              {user}
               <AccountBoxIcon/>
             </Link>
           </div>
