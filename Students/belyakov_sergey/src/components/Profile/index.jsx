@@ -7,8 +7,8 @@ import connect from 'react-redux/es/connect/connect'
 import {setName} from '../../store/actions/user-actions'
 
 import TextField from '@material-ui/core/TextField'
-import {Button, InputAdornment} from "@material-ui/core";
-import {AccountCircle, ArrowBack, Save} from "@material-ui/icons";
+import {Button, InputAdornment} from '@material-ui/core'
+import {AccountCircle, ArrowBack, Save} from '@material-ui/icons'
 
 
 import './style.css'
