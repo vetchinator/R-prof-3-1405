@@ -35,7 +35,9 @@ class ChatList extends Component {
   changeTitleRoom(roomId) {
     const {rooms, renameRoom} = this.props
     const title = window.prompt('Новое значение', rooms[roomId].title)
-    renameRoom(roomId, title)
+    if (title) {
+      renameRoom(roomId, title)
+    }
   }
 
   render() {

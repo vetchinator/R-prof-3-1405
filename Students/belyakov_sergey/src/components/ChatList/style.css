@@ -35,9 +35,6 @@ ul {
 
 ul li {
   display: flex;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   width: 100%;
   line-height: 35px;
   padding: 10px;
@@ -60,6 +57,9 @@ ul li svg:hover {
 
 .room-title {
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chat-list a {
