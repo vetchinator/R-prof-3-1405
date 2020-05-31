@@ -45,6 +45,7 @@ ul li {
 
 ul li svg {
   opacity: 0;
+  margin-left: -20px;
 }
 
 ul li:hover svg {
@@ -57,6 +58,7 @@ ul li svg:hover {
 
 .room-title {
   flex: 1;
+  width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,6 +66,7 @@ ul li svg:hover {
 
 .chat-list a {
   width: 100%;
+  line-height: 50px;
   text-decoration: none;
   color: rgba(0, 0, 0, .7);
 }

@@ -61,6 +61,15 @@
   opacity: .9;
 }
 
+.header-bg h2 {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  margin: 0 50px;
+}
+
 .hidden {
   display: none
 }
@@ -75,6 +84,11 @@
   }
 
   .header-bg h2 {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
     margin: 0 50px;
   }
 }
