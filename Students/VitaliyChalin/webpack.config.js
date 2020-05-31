@@ -15,7 +15,8 @@ module.exports = {
     },
     target: 'web', // тип сборки
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -24,9 +25,7 @@ module.exports = {
                     plugins: [
                         [
                             "@babel/plugin-proposal-class-properties",
-                            {
-                                "loose": true
-                            }
+                            {"loose": true}
                         ]
                     ]
 
