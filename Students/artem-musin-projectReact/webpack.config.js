@@ -16,12 +16,12 @@ module.exports = {
 
     entry: {
         // точка входа до index.js
-        main: path.resolve(__dirname, 'src', 'index.jsx')
+            main: path.resolve(__dirname, 'src', 'index.jsx')
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        publicPath: '',
-        filename: path.join('js', 'bundle.js')
+            path: path.join(__dirname, 'dist'),
+            publicPath: '',
+            filename: path.join('js', 'bundle.js')
     },
     target: 'web',    // настройка типа сборки
 
@@ -55,6 +55,6 @@ module.exports = {
             filename: 'index.html',
             template: path.resolve(__dirname, 'src', 'public', 'index.html')    // template свойство - для копии собственного html
         })
-
+        
     ]
 };
