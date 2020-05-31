@@ -6,9 +6,9 @@ const path = require('path');
 
 
 module.exports = {
-
+    
     devServer: {
-        port: 8080,
+        port: 8080, 
         historyApiFallback: {
             index: 'index.html'
         },
@@ -23,8 +23,8 @@ module.exports = {
             publicPath: '',
             filename: path.join('js', 'bundle.js')
     },
-    target: 'web',    // настройка типа сборки
-
+    target: 'web',    // настройка типа сборки 
+    
     module: {
         rules: [
             {
@@ -48,13 +48,13 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: path.join('style', '[name].css'),
+            filename: path.join('style', '[name].css'), 
             chunkFilename: '[id].css',
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(__dirname, 'src', 'public', 'index.html')    // template свойство - для копии собственного html
-        })
+        }) 
         
     ]
 };
