@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types'
 
-import { setName, setBio, setDate } from '../../store/actions/profile_actions.js'
+import { setName, setBio, setDate, setCity } from '../../store/actions/profile_actions.js'
 import { bindActionCreators } from 'redux';
 import connect from 'react-redux/es/connect/connect';
 
@@ -11,6 +11,26 @@ import { Link } from 'react-router-dom';
 import { Paper, Typography, Input, InputLabel, Grid, TextField } from '@material-ui/core';
 import { RaisedButton } from 'material-ui';
 
+
+const backStyles = {
+    margin: 'auto',
+    maxWidth: '55em',
+    padding: '1em',
+    backgroundColor: '#e4ccff'
+}
+
+const inputBlock = {
+    maxWidth: '25em',
+    margin: 'auto',
+    alignContent: 'center',
+    justifyContent: 'center'
+}
+
+const buttonsBlock = {
+    padding: '1em',
+    justifyContent: 'center',
+    alignContent: 'center'
+}
 
 
 class Auth extends React.Component {
@@ -25,14 +45,14 @@ class Auth extends React.Component {
         user: '',
         bio: '',
         date: '',
-        
+        city: ''
     }
 
-    // handleChange = (evt, field) => {
-    //     if (evt.keyCode !== 13) {
-    //       this.setState({ [field]: evt.target.value })
-    //     }
-    //   }
+    handleChange = (evt) => {
+        if (evt.keyCode == 13) {
+          this.setState({ [evt.target.name]: evt.target.value })
+        }
+      }
 
     handleInfo = (user, date, bio) => {
         user && this.props.setName(user);
@@ -55,14 +75,19 @@ class Auth extends React.Component {
         return this.props.setDate(text);
     }
 
-    // setBio = (event) => {
-    //     this.props.setBio(event.target.value);
-    //     console.log(this.props.setBio(event.target.value))
-    // }
+    handleCity = (text) => {
+        return this.props.setCity(text);
+    }
+
+    handleKeyUp = (evt) => {
+        if (evt.keyCode == 13) this.handleInfo()
+    }
 
     render() {
         return (
-            <Paper>
+            <Paper
+                style={backStyles}>
+
                 <Grid
                     container
                     direction="column">
@@ -79,46 +104,74 @@ class Auth extends React.Component {
                         <Grid
                             container
                             item
-                            direction="column">
+                            direction="column"
+                            spacing={3}
+                            style={inputBlock}
+                            >
 
-                            <InputLabel htmlFor="component-helper">Your nickname</InputLabel>
-                            <Input
-                                fullWidth
-                                aria-describedby="component-helper-text"
-                                onChange={ (e) => { this.handleName(e.target.value) } }
-                            />
+                            <Grid item>
+                                <InputLabel htmlFor="component-helper">Your nickname</InputLabel>
+                                    <Input
+                                        fullWidth
+                                        aria-describedby="component-helper-text"
+                                        onChange={ (e) => { this.handleName(e.target.value) } }
+                                    />  
+                                </Grid>
 
-                            <InputLabel htmlFor="component-helper">Your date of born</InputLabel>
-                            <Input 
-                                fullWidth
-                                aria-describedby="component-helper-text"
-                                onChange={ (e) => { this.handleDate(e.target.value) } }
-                            />
+                            <Grid item>
+                                <InputLabel htmlFor="component-helper">Your city</InputLabel>
+                                    <Input 
+                                        fullWidth
+                                        aria-describedby="component-helper-text"
+                                        onChange={ (e) => { this.handleCity(e.target.value) } }
+                                    />
+                                </Grid>
+
+                                <Grid item>
+                                    <InputLabel htmlFor="component-helper">Your date of born</InputLabel>
+                                        <Input 
+                                            fullWidth
+                                            aria-describedby="component-helper-text"
+                                            onChange={ (e) => { this.handleDate(e.target.value) } }
+                                        />
+                                    </Grid>
                             
-                            <TextField
-                                label="Tell us about yourself"
-                                fullWidth
-                                onChange={ (e) => { this.handleBio(e.target.value) } }
-                            />    
+                            <Grid item>
+                                    <TextField
+                                        label="Tell us about yourself"
+                                        fullWidth
+                                        multiline
+                                        variant="outlined"
+                                        rows={4}
+                                        onChange={ (e) => { this.handleBio(e.target.value) } }
+                                    />
+                                </Grid>    
 
                             </Grid>
                         
                                 <Grid
                                 container
                                 item
-                                direction="row">
-                                            <Link to='/profile/'>
-                                                <RaisedButton
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={ () => this.handleInfo() }>
-                                                    SUBMIT
-                                                    </RaisedButton>
-                                                </Link>
-
-                                                    <Link to='/main'>
-                                                        Go to the chat as anonymous
+                                spacing={3}
+                                alignItems="center"
+                                style={buttonsBlock}>
+                                            <Grid item>
+                                                    <Link to='/profile/'>
+                                                        <RaisedButton
+                                                            variant="contained"
+                                                            color="primary"
+                                                            onClick={ () => this.handleInfo() }
+                                                            onKeyUp={ (evt) => { this.handleBio(evt.target.value) } } >
+                                                                SUBMIT
+                                                            </RaisedButton>
                                                         </Link>
+                                                </Grid>
+
+                                                    <Grid item>
+                                                        <Link to='/'>
+                                                                Go to the chats!
+                                                            </Link>
+                                                        </Grid>
                                     </Grid>
                     </Grid>
                 </Paper>
@@ -129,9 +182,10 @@ class Auth extends React.Component {
 const mapStateToProps = ({ prflReducer }) => ({
     user: prflReducer.user,
     date: prflReducer.date,
-    bio: prflReducer.bio
+    bio: prflReducer.bio,
+    city: prflReducer.city
   });  
 
-  const mapDispatchToProps = dispatch => bindActionCreators({ setName, setBio, setDate }, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ setName, setBio, setDate, setCity }, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(Auth); 

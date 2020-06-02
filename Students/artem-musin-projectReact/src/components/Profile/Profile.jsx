@@ -1,10 +1,11 @@
 import React from 'react';
 import { Grid, Typography, Paper, Divider, Box } from '@material-ui/core';
-import { RaisedButton } from 'material-ui';
+
+import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-import { setName, setBio, setDate } from '../../store/actions/profile_actions.js'
+import { setName, setBio, setDate, setCity } from '../../store/actions/profile_actions.js'
 import { bindActionCreators } from 'redux';
 import connect from 'react-redux/es/connect/connect';
 
@@ -33,24 +34,31 @@ const ulStyle = {
     listStyleType: 'none'
 }
 
+const linkButton = {
+    textDecoration: 'none'
+}
+
 class Profile extends React.Component {
 
     static propTypes = {
         user: PropTypes.string,
         date: PropTypes.string,
-        bio: PropTypes.string
+        bio: PropTypes.string,
+        city: PropTypes.string
     }
 
     static defaultProps = {
         user: 'Artem',
         date: '21/01/1998',
-        bio: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+        bio: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+        city: 'Saratov'
     }
 
     handleInfo = () => {
         console.log(this.props.user);
         console.log(this.props.date);
         console.log(this.props.bio);
+        console.log(this.props.city)
     }
 
     render() {
@@ -73,6 +81,20 @@ class Profile extends React.Component {
                         direction="column"
                         style={mainProfileInfo}
                         >
+                            <Grid
+                                item
+                                component='a'>
+                                    
+                                    <Link to='/main/'
+                                        style={linkButton}>
+        
+                                            Go to the chats
+                                            
+                                        </Link>
+                                    
+                                
+                                </Grid>
+
                             <Grid item>
                                 <img src="https://sun7-9.userapi.com/1xjiM1HHTgBf8dfR7oBNpU1puXu3irG0LvgelA/NgMNbLU65iw.jpg" alt="Profile Photo"/>
                             </Grid>
@@ -87,7 +109,7 @@ class Profile extends React.Component {
                                     </Typography>
                                     <Divider />
                                     <Typography variant="subtitle1">
-                                        City: Saratov
+                                        City: { this.props.city }
                                     </Typography>
                                     <Divider />
                                     <Typography variant="subtitle1">
@@ -147,9 +169,10 @@ class Profile extends React.Component {
 const mapStateToProps = ({ prflReducer }) => ({
     user: prflReducer.user,
     date: prflReducer.date,
-    bio: prflReducer.bio
+    bio: prflReducer.bio,
+    city: prflReducer.city
   });  
 
-  const mapDispatchToProps = dispatch => bindActionCreators({ setName, setBio, setDate }, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ setName, setBio, setDate, setCity }, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(Profile); 

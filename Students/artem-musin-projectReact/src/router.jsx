@@ -2,6 +2,10 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
+import {bindActionCreators} from 'redux';
+import {addChat} from './store/actions/chats_actions.js';
+import connect from 'react-redux/es/connect/connect';
+
 
 import Auth from './components/Authentification/Auth.jsx'
 import Layout from './components/Layout/Layout.jsx';
@@ -9,23 +13,32 @@ import Profile from './components/Profile/Profile.jsx';
 
 
 
-export default class Router extends React.Component {
+class Router extends React.Component {
 
     render() {
 
+        let { chats } = this.props;
+
+        let routesArray = Object.keys(chats).map(key => (
+            <Route path={ `/chat/${ key }/` } key={ key }  render={() => <Layout chatTitle={ chats[key].title } />} exact />
+        ))
+
         return (
             <Switch>
-                <Route path='/' component={ Auth } exact/>
-                <Route path='/main' component={ Layout } exact/>
-                <Route path='/profile/' component={ Profile }
-                    render={ () => <Profile user={'loh'} date={this.props.date} bio={this.props.bio} /> } exact />
-                <Route path='/chat/1/'  render={() => <Layout chatId={1} />} exact />
-                <Route path='/chat/2/'  render={() => <Layout chatId={2} />} exact />
-                <Route path='/chat/3/'  render={() => <Layout chatId={3} />} exact />
-                <Route path='/chat/4/'  render={() => <Layout chatId={4} />} exact />
-                <Route path='/chat/5/'  render={() => <Layout chatId={5} />} exact />
+                <Route path='/auth' component={ Auth } exact/>
+                <Route path='/' render={() => <Layout chatTitle='Pick room and go!' /> } exact/>
+                <Route path='/profile/' component={ Profile } exact />
+                { routesArray }
             </Switch>
         )
 
     }
 }
+
+const mapStateToProps = ({ chatsReducer }) => ({
+    chats: chatsReducer.chats
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ addChat }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Router)
